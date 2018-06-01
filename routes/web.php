@@ -80,6 +80,7 @@ Route::group(['middleware' => 'auth'], function () {
             Route::get('print-stock-balance', 'ReportController@printStockBalance');
             Route::get('stock-in', 'ReportController@stockIn');
             Route::get('stock-adjustment', 'ReportController@stockAdjustment');
+            Route::get('sales-transaction', 'ReportController@salesTransaction');
             Route::get('daily-summary', 'ReportController@dailySummary');
             Route::get('print-daily-summary', 'ReportController@printDailySummary');
             Route::get('sale-history', 'ReportController@saleHistory');

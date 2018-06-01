@@ -139,7 +139,7 @@
             var e = this.getSVGForExport(b, a), b = l(this.options.exporting,
                 b);
             f.post(b.url, {
-                filename: b.filename || "chart",
+                filename: b.filename || "Sale Graph Report" ,
                 type: b.type,
                 width: b.width || 0,
                 scale: b.scale || 2,

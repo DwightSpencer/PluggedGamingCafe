@@ -10,7 +10,7 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/sale.css') }}" rel="stylesheet">
 </head>
-<body style="background: #808080">
+<body style="background: #e9e7e9">
 <div class="modal fade " id="modal" tabindex="-1" role="dialog" aria-labelledby="modal"
      aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -32,16 +32,16 @@
         </div>
     </div>
 </div>
-<div class="container-fluid" style="background: #eef2f4;border-bottom: 5px solid whitesmoke">
-    <img src="/images/logo.png" height="50px" width="100px"/>
-    <div class="pull-right" style="padding-top: 10px;font-size: 16px">
-        Hi, {{ucwords(Auth::user()->username)}} ( <a href="{{url('/logout')}}" onclick="event.preventDefault();
+<div class="container-fluid" style="background: #4f3558;border-bottom: 5px solid #675682">
+    <img src="/images/logo.png" height="70px" width="100px"/><font color= "white"> PLUGGED BOARD GAME CAFE AND GAMING LOUNGE </font>
+    <div class="pull-right" style="padding-top: 20px;font-size: 15px">
+    <font color= "white">You are logged in as <b><u>{{ucwords(Auth::user()->username)}}</u></b> ( <a href="{{url('/logout')}}" onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();">Logout</a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST"
               style="display: none;">
             {{ csrf_field() }}
         </form>
-        )
+        )</font>
     </div>
 </div>
 @yield('content')

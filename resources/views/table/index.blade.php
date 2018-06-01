@@ -41,9 +41,7 @@
             <td align="center">{{$i++}}</td>
             <td>{{$table->name}}</td>
             <td style="text-align: center">
-                <a class="btn btn-primary btn-xs" title="Edit"
-                   href="javascript:ajaxLoad('table/update/{{$table->id}}')">
-                    <i class="glyphicon glyphicon-edit"></i> Edit</a>
+               
                 <a class="btn btn-danger btn-xs" title="Delete"
                    href="javascript:if(confirm('Are you sure want to delete?')) ajaxDelete('table/delete/{{$table->id}}','{{csrf_token()}}')">
                     <i class="glyphicon glyphicon-trash"></i> Delete

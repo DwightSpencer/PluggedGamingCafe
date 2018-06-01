@@ -67,7 +67,7 @@
         },
         yAxis: {
             title: {
-                text: 'Cash in hand ($)'
+                text: 'Cash in hand (₱)'
             },
             labels: {
                 format: '{value:.2f}'

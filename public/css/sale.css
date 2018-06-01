@@ -16,25 +16,25 @@
 }
 
 .menu {
-    background: midnightblue;
+    background: #4f3558;
     color: white;
     margin: 5px;
     text-align: center;
     padding-top: 50px;
     padding-bottom: 50px;
-    font-size: 20px;
+    font-size: 17px;
     float: left;
     position: relative;
     width: 45%;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
     cursor: pointer;
-    border-radius: 4px;
-    border: 2px outset darkgrey;
+    border-radius: 20px;
+    border: 2px outset #675682;
 }
 
 .active {
-    color: yellow;
-    border: 2px outset yellow;
+    color:  #E52A6F;
+    border: 2px outset  #E52A6F;
 }
 
 .tbl {

@@ -24,6 +24,7 @@
             <option {{Session::get('dm')=='Month'?'selected':''}} value="Month">Month</option>
         </select>
     </div>
+    
     <div class="col-sm-2 form-group">
         <a href="javascript:ajaxLoad('report/sale-graph?from='+$('#from').val()+'&to='+$('#to').val())"
            class="btn btn-primary"><i
@@ -42,7 +43,7 @@
             x: -20 //center
         },
         subtitle: {
-            text: '',
+            text: '{{date("M d, Y",strtotime(Session::get('to')))}} <br> by: {{ucwords(Auth::user()->username)}}',
             x: -20
         },
         xAxis: {
@@ -51,7 +52,7 @@
         },
         yAxis: {
             title: {
-                text: 'Cash in hand ($)'
+                text: 'Cash in hand (₱)'
             },
             plotLines: [{
                 value: 0,
@@ -72,7 +73,7 @@
         },
         tooltip: {
             headerFormat: '',
-            valuePrefix: '$'
+            valuePrefix: '₱'
         },
         legend: {
             layout: 'vertical',

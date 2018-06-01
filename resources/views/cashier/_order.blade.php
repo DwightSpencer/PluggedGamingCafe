@@ -37,8 +37,8 @@
             <th style="margin: 0px;padding: 0px;vertical-align: middle" width="1px"></th>
             <th>Description</th>
             <th style="text-align: center">Qty</th>
-            <th style="text-align: right;">Price</th>
-            <th style="text-align: right">Total</th>
+            <th style="text-align: center;">Price</th>
+            <th style="text-align: center">Total</th>
             <th style="width: 1px"></th>
         </tr>
         </thead>
@@ -62,14 +62,14 @@
                                type="text" style="width: 20px;border: none;height: 30px;text-align: center"
                                value="{{$orderDetail->quantity}}"/>
                     </td>
-                    <td align="right">
+                    <td align="center">
                         <input onfocus="$(this).select()"
                                onchange="ajaxLoad('cashier/update-price/{{$orderDetail->id}}/'+this.value,'orderList')"
-                               type="text" style="width: 30px;border: none;height: 30px;text-align: right"
+                               type="text" style="width: 60px;border: none;height: 30px;text-align: center"
                                value="₱ {{number_format($orderDetail->price,2)}}"/>
                     </td>
-                    <td align="right">
-                        <input type="text" style="width: 50px;border: none;height: 30px;text-align: right" readonly
+                    <td align="center">
+                        <input type="text" style="width: 60px;border: none;height: 30px;text-align: center" readonly
                                value="₱ {{number_format($orderDetail->price * $orderDetail->quantity*(1-$orderDetail->discount/100),2)}}"/>
 
                     </td>

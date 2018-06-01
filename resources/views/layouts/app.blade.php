@@ -88,7 +88,6 @@
                             <li class="nav_report_daily-summary">
                                 <a href="#report/daily-summary">Daily Summary Report</a>
                             </li>
-                                <li class="nav_report_sales-transaction"><a href="#report/sales-transaction">Sales Transaction</a></li>
                             <li class="nav_report_sale-history">
                                 <a href="#report/sale-history">Sale History Report</a>
                             </li>

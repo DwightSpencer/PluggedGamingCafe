@@ -67,10 +67,6 @@ class ReportController extends Controller
             ->first();
         return view('report.daily_summary', ['orders' => $order, 'sale' => $sale]);
     }
-      public function salesTransaction()
-    {
-        return view('report.sales_transaction');
-    }
 
     public function printDailySummary()
     {

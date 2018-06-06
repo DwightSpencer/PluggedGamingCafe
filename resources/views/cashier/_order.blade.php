@@ -100,7 +100,7 @@
                                                          onchange="ajaxLoad('cashier/update-discount/{{$order->id}}/'+this.value,'orderList')"
                                                          type="text"
                                                          style="width: 50px;border: none;text-align: right"
-                                                         value="@if(Session::get('order_id')!=''){{$order->discount}} @endif" readonly="readonly"/>
+                                                         value="@if(Session::get('order_id')!=''){{$order->discount}} @endif" readonly="readonly" />
                         %
                     </th>
                 </tr>

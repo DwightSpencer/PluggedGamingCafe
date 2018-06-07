@@ -9,8 +9,13 @@
             @endforeach
         </div>
         <div class="col-md-5">
+<<<<<<< HEAD
             <input type="text" class="form-control"
                    style="border: 2px solid gray;height: 50px;border-radius: 0px;background: lightyellow;font-size: 18px"
+=======
+            <input type="text" class="form-control" placeholder="Search..."
+                   style="border: 2px solid white;height: 50px;border-radius: 0px;background: white;font-size: 18px"
+>>>>>>> 877d514c081be94c502d087c8471c764b974049c
                    onfocus="$(this).select()"
                    onkeyup="ajaxLoad('cashier/products?search='+this.value,'productList')" value="Search..."/>
             <div id="productList">
@@ -24,8 +29,8 @@
                                  class="pull-left" width="80px" height="70px"
                                  style="margin: 5px 5px 0px 5px"/>
                             <div style="margin:20px">
-                                <span style="color: red;font-size: 15px"
-                                      class="pull-right">₱{{number_format($menu->unitprice,2)}}</span>
+                                <span style="color: #E52A6F;font-size: 15px"
+                                      class="pull-right">₱ {{number_format($menu->unitprice,2)}}</span>
                                 <div>{{$menu->name}} <span style="color: gray">({{$menu->id}})</span></div>
                             </div>
                         </li>

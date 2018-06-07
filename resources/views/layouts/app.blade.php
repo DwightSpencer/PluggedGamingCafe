@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Plugged</title>
+    <title>Plugged Board Game Cafe and Gaming Lounge</title>
     <!-- Styles -->
     <link href="{{ asset('bootstrap-3.3.7/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('bootstrap-3.3.7/css/bootstrap-theme.min.css') }}" rel="stylesheet">
@@ -21,9 +21,9 @@
         }
     </style>
 </head>
-<body style="background: grey">
-<div class="container-fluid" style="background: #eef2f4;border-bottom: 5px solid whitesmoke">
-    <img src="{{asset('images/logo.png')}}" height="50px" width="100px"/>
+<body style="background: #e9e7e9">
+<div class="container-fluid" style="background: #4f3558;border-bottom: 5px solid #675682">
+    <img src="{{asset('images/logo.png')}}" height="70px" width="100px"/><font color= "white"> PLUGGED BOARD GAME CAFE AND GAMING LOUNGE </font>
     <button class="navbar-toggle collapsed" data-toggle="collapse"
             data-target="#menu" aria-expanded="false">
         <i style="color: darkgrey" class="glyphicon glyphicon-menu-hamburger"></i> Menu
@@ -32,8 +32,8 @@
 <div class="container-fluid" style="padding-bottom: 160px">
     <div class="row-fluid" style="margin-top: 10px">
         <div class="col-sm-4 col-md-3">
-            <div class="collapse navbar-collapse" id="menu" style="background:darkslateblue">
-                <div style="background: grey;margin: 15px 0;padding: 5px 0;text-align: center">
+            <div class="collapse navbar-collapse" id="menu" style="background: #4f3558">
+                <div style="background: #675682;margin: 15px 0;padding: 5px 0;text-align: center">
                     <table width="100%">
                         <tr>
                             <td width="30%" style="padding:0 5px 0 5px"><img
@@ -41,8 +41,8 @@
                                         width="100%"
                                         class="img-rounded"/></td>
                             <td>
-                                <b style="font-size: 150%;color: yellow">{{ucwords(Auth::user()->username)}}</b><br/>
-                                <a href="{{url('/logout')}}" style="font-size: 14px;color: whitesmoke;" onclick="event.preventDefault();
+                                <b style="font-size: 180%;color: white">{{ucwords(Auth::user()->username)}}</b><br/>
+                                <a href="{{url('/logout')}}" style="font-size: 15px;color: white;" onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();"><i
                                             class="glyphicon glyphicon-log-out"></i>
                                     Logout</a>

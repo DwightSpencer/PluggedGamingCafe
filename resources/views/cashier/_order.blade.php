@@ -45,8 +45,8 @@ if(isset($filename)){
             <th style="margin: 0px;padding: 0px;vertical-align: middle" width="1px">Id</th>
             <th>Description</th>
             <th style="text-align: center">Qty</th>
-            <th style="text-align: right;">Price</th>
-            <th style="text-align: right">Total</th>
+            <th style="text-align: center;">Price</th>
+            <th style="text-align: center">Total</th>
             <th style="width: 1px"></th>
         </tr>
         </thead>
@@ -67,18 +67,28 @@ if(isset($filename)){
                     <td align="center">
                         <input onfocus="$(this).select()"
                                onchange="ajaxLoad('cashier/update-quantity/{{$orderDetail->id}}/'+this.value,'orderList')"
+<<<<<<< HEAD
                                type="number" step="1" style="width: 40px;border: none;height: 30px;text-align: center"
                                value="{{$orderDetail->quantity}}" />
+=======
+                               type="text" style="width: 20px;border: none;height: 30px;text-align: center"
+                               value="{{$orderDetail->quantity}}" readonly="readonly"/>
+>>>>>>> 877d514c081be94c502d087c8471c764b974049c
                     </td>
-                    <td align="right">
+                    <td align="center">
                         <input onfocus="$(this).select()"
                                onchange="ajaxLoad('cashier/update-price/{{$orderDetail->id}}/'+this.value,'orderList')"
+<<<<<<< HEAD
                                type="text" style="width: 30px;border: none;height: 30px;text-align: right"
                                value="₱ {{number_format($orderDetail->price,2)}}" readonly/>
+=======
+                               type="text" style="width: 60px;border: none;height: 30px;text-align: center"
+                               value="₱ {{number_format($orderDetail->price,2)}}" readonly="readonly" />
+>>>>>>> 877d514c081be94c502d087c8471c764b974049c
                     </td>
-                    <td align="right">
-                        <input type="text" style="width: 50px;border: none;height: 30px;text-align: right" readonly
-                               value="₱ {{number_format($orderDetail->price * $orderDetail->quantity*(1-$orderDetail->discount/100),2)}}"/>
+                    <td align="center">
+                        <input type="text" style="width: 60px;border: none;height: 30px;text-align: center" readonly
+                               value="₱ {{number_format($orderDetail->price * $orderDetail->quantity*(1-$orderDetail->discount/100),2)}}" readonly="readonly"/>
 
                     </td>
                     <td style="text-align: center;padding-top: 15px">
@@ -123,7 +133,7 @@ if(isset($filename)){
                                                          onchange="ajaxLoad('cashier/update-discount/{{$order->id}}/'+this.value,'orderList')"
                                                          type="text"
                                                          style="width: 50px;border: none;text-align: right"
-                                                         value="@if(Session::get('order_id')!=''){{$order->discount}} @endif"/>
+                                                         value="@if(Session::get('order_id')!=''){{$order->discount}} @endif" readonly="readonly" />
                         %
                     </th>
                 </tr>

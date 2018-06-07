@@ -173,16 +173,17 @@ iframe {
   display: block;
   position: absolute;
   z-index: -1;
-  width: 100%;
+  width: 50%;
   height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(0,0,0,0.65);
+  background-color: white;
 }
 
 .wrap-login100 {
   width: 390px;
   border-radius: 10px;
+  
   overflow: hidden;
 
   background: transparent;

@@ -67,24 +67,24 @@ if(isset($filename)){
                     <td align="center">
                         <input onfocus="$(this).select()"
                                onchange="ajaxLoad('cashier/update-quantity/{{$orderDetail->id}}/'+this.value,'orderList')"
-<<<<<<< HEAD
+
                                type="number" step="1" style="width: 40px;border: none;height: 30px;text-align: center"
                                value="{{$orderDetail->quantity}}" />
-=======
+
                                type="text" style="width: 20px;border: none;height: 30px;text-align: center"
                                value="{{$orderDetail->quantity}}" readonly="readonly"/>
->>>>>>> 877d514c081be94c502d087c8471c764b974049c
+
                     </td>
                     <td align="center">
                         <input onfocus="$(this).select()"
                                onchange="ajaxLoad('cashier/update-price/{{$orderDetail->id}}/'+this.value,'orderList')"
-<<<<<<< HEAD
+
                                type="text" style="width: 30px;border: none;height: 30px;text-align: right"
                                value="₱ {{number_format($orderDetail->price,2)}}" readonly/>
-=======
+
                                type="text" style="width: 60px;border: none;height: 30px;text-align: center"
                                value="₱ {{number_format($orderDetail->price,2)}}" readonly="readonly" />
->>>>>>> 877d514c081be94c502d087c8471c764b974049c
+
                     </td>
                     <td align="center">
                         <input type="text" style="width: 60px;border: none;height: 30px;text-align: center" readonly

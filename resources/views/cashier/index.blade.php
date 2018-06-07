@@ -10,9 +10,9 @@
         </div>
         <div class="col-md-5">
             <input type="text" class="form-control"
-                   style="border: 2px solid whitesmoke;height: 50px;border-radius: 0px;background: lightyellow;font-size: 18px"
+                   style="border: 2px solid gray;height: 50px;border-radius: 0px;background: lightyellow;font-size: 18px"
                    onfocus="$(this).select()"
-                   onkeyup="ajaxLoad('cashier/products?search='+this.value,'productList')"/>
+                   onkeyup="ajaxLoad('cashier/products?search='+this.value,'productList')" value="Search..."/>
             <div id="productList">
                 <ul class="list-group"
                     style="height: 520px; overflow-y: auto; border: 2px outset;background: white">

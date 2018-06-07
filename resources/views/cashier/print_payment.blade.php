@@ -1,3 +1,4 @@
+
 <center>
     <img src="{{asset('images/logo.png')}}" height="80px" width="150px"/>
     <h1 style="font-size:20px;margin:0">Plugged Board Cafe and Gaming Lounge</h1>
@@ -23,6 +24,12 @@
         <td width="80px" style="text-align:right">Customer:</td>
         <td style="text-align:left">{{!empty($order->customer_id)&&$order->customer_id!='-1'?$order->customer->name:'General'}}</td>
     </tr>
+    <tr>
+        <td width="80px" style="text-align:right">This Order is:</td>
+        <td style="text-align:left">
+   $selectOption = $_POST['taskOption'];
+        </td>
+    </tr>
 </table>
 <table style="width:100%;margin-top:10px" border="0" cellspacing="0" cellpadding="2px">
     <tr style="font-size:13px">
@@ -41,7 +48,7 @@
     @foreach($order->order_details()->select(DB::raw("description,sum(quantity) as quantity,price,discount"))->groupBy('product_id')->groupBy('price')->groupBy('description')->groupBy('discount')->orderBy('description')->get() as $orderDetail)
         <tr style="font-size:11px;@if(!empty($orderDetail->deleted_at)) text-decoration: line-through; @endif">
             <td align="center">{{$i++}}</td>
-            <td align="left">{{$orderDetail->description}}</td>
+            <td align="center">{{$orderDetail->description}}</td>
             <td align="center">{{$orderDetail->quantity}}</td>
             <td align="right">₱ {{number_format($orderDetail->price,2)}}</td>
             <td align="right">
@@ -66,8 +73,12 @@
                     </tr>
                 @endif
                 <tr>
-                    <th style="text-align: right;padding-right: 20px">Net Amount (₱):</th>
+                    <th style="text-align: right;padding-right: 20px">Net Amount(VAT Inclusive) (₱):</th>
                     <th style="text-align: right">{{number_format($total*(1-$order->discount/100),2)}}</th>
+                </tr>
+                <tr>
+                    <th style="text-align: right;padding-right: 20px">Less VAT (₱):</th>
+                    <th style="text-align: right">{{number_format($total*(.12),2)}}</th>
                 </tr>
                 @if(Session::get('usd')>0)
                     <tr>

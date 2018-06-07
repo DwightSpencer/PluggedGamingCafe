@@ -1,3 +1,11 @@
+<?php if(isset($_POST['print_payment.blade.php'])){
+    $filename = $_POST['print_payment.blade.php'];
+}
+if(isset($filename)){ 
+    echo $filename;
+
+}
+?>
 <style>
     input[type=text]:focus {
         background: lightyellow;
@@ -34,7 +42,7 @@
     <table class="table">
         <thead>
         <tr>
-            <th style="margin: 0px;padding: 0px;vertical-align: middle" width="1px"></th>
+            <th style="margin: 0px;padding: 0px;vertical-align: middle" width="1px">Id</th>
             <th>Description</th>
             <th style="text-align: center">Qty</th>
             <th style="text-align: right;">Price</th>
@@ -48,25 +56,25 @@
             @foreach($order->order_details()->orderBy('description')->get() as $orderDetail)
                 <tr style="color: darkblue;@if(($orderDetail->status=='Filled')) color: red; @endif @if(!empty($orderDetail->deleted_at)) text-decoration: line-through; @endif">
                     <td style="margin: 0px;padding: 0px;vertical-align: middle">
-                        <input type="checkbox" style="width: 18px;height: 18px" value="{{$orderDetail->id}}"
-                               class="idRow"/>
+                        <input type="text" style="width: 40px;height: 18px" value="{{$orderDetail->id}}"
+                               class="idRow" readonly/>
                     </td>
                     <td style="@if($orderDetail->sent==1) color:red; @endif">
                         <input onchange="ajaxLoad('cashier/update-description/{{$orderDetail->id}}/'+this.value,'orderList')"
                                type="text" style="width: 100%;border: none;height: 30px"
-                               value="{{$orderDetail->description}}"/>
+                               value="{{$orderDetail->description}}" readonly/>
                     </td>
                     <td align="center">
                         <input onfocus="$(this).select()"
                                onchange="ajaxLoad('cashier/update-quantity/{{$orderDetail->id}}/'+this.value,'orderList')"
-                               type="text" style="width: 20px;border: none;height: 30px;text-align: center"
-                               value="{{$orderDetail->quantity}}"/>
+                               type="number" step="1" style="width: 40px;border: none;height: 30px;text-align: center"
+                               value="{{$orderDetail->quantity}}" />
                     </td>
                     <td align="right">
                         <input onfocus="$(this).select()"
                                onchange="ajaxLoad('cashier/update-price/{{$orderDetail->id}}/'+this.value,'orderList')"
                                type="text" style="width: 30px;border: none;height: 30px;text-align: right"
-                               value="₱ {{number_format($orderDetail->price,2)}}"/>
+                               value="₱ {{number_format($orderDetail->price,2)}}" readonly/>
                     </td>
                     <td align="right">
                         <input type="text" style="width: 50px;border: none;height: 30px;text-align: right" readonly
@@ -88,6 +96,21 @@
     @if(count($order)>0)
         <div style="text-align: right;float: right;border-top: solid 1px whitesmoke;">
             <table width="100%">
+            <tr>
+                <th style="text-align: left">
+                     
+                    </th>
+                </tr>
+                <tr>
+                    <th style="text-align: right;padding-right: 20px">This Order is:</th>
+                    <th style="text-align: right">
+                    <select name="taskOption">
+  <option value="1">Dine In</option>
+  <option value="2">Take Out</option>
+  $selectOption = $_POST['taskOption'];
+</select>
+                    </th>
+                </tr>
                 <tr>
                     <th style="text-align: right;padding-right: 20px">Customer:</th>
                     <th style="text-align: right">

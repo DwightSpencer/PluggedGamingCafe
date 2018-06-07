@@ -3,12 +3,12 @@
     <h2 style="font-size:16px;margin:0">Plugged Board Cafe and Gaming Lounge</h2>
     <i style="font-size:11px;width:90%;display:block">Address: 16 Legarda Road, Baguio City
         Contact Number: 09178531817 </i>
-    <h3 style="padding: 0px;margin: 0px">Invoice</h3>
+    <h3 style="padding: 0px;margin: 0px"></h3>
 </center>
 <hr style="size:2px;border:inset;margin-top: 0px;padding-top: 0px">
 <table style="width:100%;font-size:12px">
     <tr>
-        <td width="80px" style="text-align:right">Invoice #:</td>
+        <td width="80px" style="text-align:right">Id #:</td>
         <td style="text-align:left">{{str_pad($order->id,6,0,0)}}</td>
         <td style="width:60px;text-align:right">Date:</td>
         <td style="text-align:left;width:100px">{{date("d-M-Y",strtotime($order->updated_at))}}</td>
@@ -29,9 +29,9 @@
         <th width="20px">No</th>
         <th>Description</th>
         <th style="width:8%;text-align: center;">Qty</th>
-        <th style="width:16%;text-align: right">Price</th>
+        
         {{--<th style="width:12%">D.C</th>--}}
-        <th style="width:18%;text-align: right">Total</th>
+        
     </tr>
     <tr style="font-size:14px">
         <th colspan="6" align="left">
@@ -42,13 +42,13 @@
     @foreach($order->order_details()->select(DB::raw("description,sum(quantity) as quantity,price,discount"))->groupBy('product_id')->groupBy('price')->groupBy('description')->groupBy('discount')->orderBy('description')->get() as $orderDetail)
         <tr style="font-size:11px;@if(!empty($orderDetail->deleted_at)) text-decoration: line-through; @endif">
             <td align="center">{{$i++}}</td>
-            <td align="left">{{$orderDetail->description}}</td>
+            <td align="center">{{$orderDetail->description}}</td>
             <td align="center">{{$orderDetail->quantity}}</td>
-            <td align="right">₱ {{number_format($orderDetail->price,2)}}</td>
+            
             {{--<td align="center">{{$orderDetail->discount}}%</td>--}}
             <td align="right">
-                ₱ {{number_format($orderDetail->quantity * $orderDetail->price * (1 - $orderDetail->discount / 100),2)}}</td>
-            <?php if (empty($orderDetail->deleted_at)) $total += ($orderDetail->price * $orderDetail->quantity * (1 - $orderDetail->discount / 100)); ?>
+               
+            
         </tr>
     @endforeach
 </table>
@@ -58,25 +58,18 @@
         <td align="right">
             <table width="100%" style="font-size: 12px">
                 @if($order->discount>0)
-                    <tr>
-                        <th style="text-align: right;padding-right: 20px">Grand Total:</th>
-                        <th style="text-align: right">₱ {{number_format($total,2)}}</th>
-                    </tr>
-                    <tr>
-                        <th style="text-align: right;padding-right: 20px">Discount ({{$order->discount}}%):</th>
-                        <th style="text-align: right">₱ {{number_format($order->discount*$total/100,2)}}</th>
-                    </tr>
+                    
+                    
                 @endif
                 <tr>
-                    <th style="text-align: right;padding-right: 20px">Net Amount:</th>
-                    <th style="text-align: right">₱ {{number_format($total*(1-$order->discount/100),2)}}</th>
+                   
                 </tr>
             </table>
         </td>
     </tr>
 </table>
 <hr>
-<center><i style="font-size: 12px">Thank you, see you again!</i></center>
+
 <script>
     //    window.print();
     //    window.close();

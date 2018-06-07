@@ -53,7 +53,7 @@ class CashierController extends Controller
                                  style="margin: 5px 5px 0px 5px"/>
                             <div style="margin:20px">
                                 <span style="color: red;font-size: 15px"
-                                      class="pull-right">$' . number_format($menu->unitprice, 2) . '</span>
+                                      class="pull-right">₱' . number_format($menu->unitprice, 2) . '</span>
                                 <div>' . $menu->name . ' <span style="color: gray">(' . $menu->id . ')</span></div>
                             </div></li>';
         }
@@ -243,6 +243,7 @@ class CashierController extends Controller
             $orderDetail->order_id = $order->id;
             $orderDetail->ordered_date = $order->created_at;
             $orderDetail->description = Input::get('description');
+            $orderDetail->thisorder = Input::get('thisorder');
             $orderDetail->quantity = Input::get('quantity');
             $orderDetail->price = Input::get('price');
             $orderDetail->user_id = Auth::user()->id;

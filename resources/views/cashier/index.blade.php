@@ -9,13 +9,10 @@
             @endforeach
         </div>
         <div class="col-md-5">
-<<<<<<< HEAD
             <input type="text" class="form-control"
                    style="border: 2px solid gray;height: 50px;border-radius: 0px;background: lightyellow;font-size: 18px"
-=======
             <input type="text" class="form-control" placeholder="Search..."
                    style="border: 2px solid white;height: 50px;border-radius: 0px;background: white;font-size: 18px"
->>>>>>> 877d514c081be94c502d087c8471c764b974049c
                    onfocus="$(this).select()"
                    onkeyup="ajaxLoad('cashier/products?search='+this.value,'productList')" value="Search..."/>
             <div id="productList">

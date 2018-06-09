@@ -41,7 +41,7 @@ function filterTable($query)
             <input type="text" name="valueToSearch" placeholder="Value To Search"><br><br>
             <input type="submit" name="search" value="Filter"><br><br>
             
-            <table>
+            <table class="table table-bordered" cellspacing="0" width="100%">
                  <tr>
                     <th>Quantity</th>
                     <th>Invoice ID #</th>

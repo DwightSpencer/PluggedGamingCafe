@@ -5,8 +5,7 @@ if(isset($_POST['search']))
     $valueToSearch = $_POST['valueToSearch'];
     // search in all table columns
     // using concat mysql function
-    $query = "SELECT order_details.quantity, order_details.order_id, order_details.description, order_details.price, order_details.ordered_date, users.username
-FROM order_details INNER JOIN users ON order_details.user_id = users.id WHERE CONCAT(order_details.quantity, order_details.id, order_details.order_id, order_details.price, order_details.ordered_date, users.username) LIKE '%".$valueToSearch."%'";
+    $query = "SELECT * FROM `order` WHERE CONCAT(`id`, `order_id`, `price`, `ordered_date`) LIKE '%".$valueToSearch."%'";
     $search_result = filterTable($query);
     
 }
@@ -27,7 +26,7 @@ function filterTable($query)
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>PHP HTML TABLE DATA SEARCH</title>
         <style>
             table,tr,th,td
             {
@@ -37,7 +36,7 @@ function filterTable($query)
     </head>
     <body>
 
-      
+        
         <form action="sales-transaction" method="post">
             <input type="text" name="valueToSearch" placeholder="Value To Search"><br><br>
             <input type="submit" name="search" value="Filter"><br><br>
@@ -49,7 +48,7 @@ function filterTable($query)
                     <th>Description</th>
                     <th>Price</th>
                     <th>Ordered Date</th>
-                    <th>Cashier #</th>
+                    <th>Cashier</th>
                 </tr>
 
       <!-- populate table from mysql database -->
@@ -60,7 +59,7 @@ function filterTable($query)
                     <td><?php echo $row['description'];?></td>
                     <td><?php echo $row['price'];?></td>
                     <td><?php echo $row['ordered_date'];?></td>
-                    <td><?php echo $row['user_id'];?></td>
+                    <td></td>
                 </tr>
                 <?php endwhile;?>
             </table>

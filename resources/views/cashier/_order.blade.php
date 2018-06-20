@@ -104,7 +104,6 @@
                      
                     </th>
                 </tr>
-            
                 <tr>
                     <th style="text-align: right;padding-right: 20px">Customer:</th>
                     <th style="text-align: right">

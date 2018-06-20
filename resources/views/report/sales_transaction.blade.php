@@ -5,7 +5,7 @@ if(isset($_POST['search']))
     $valueToSearch = $_POST['valueToSearch'];
     // search in all table columns
     // using concat mysql function
-    $query = "SELECT * FROM `order` WHERE CONCAT(`id`, `order_id`, `price`, `ordered_date`) LIKE '%".$valueToSearch."%'";
+    $query = "SELECT * FROM `order` WHERE CONCAT(`id`, `order_id`, `price`, `ordered_date`, `user_id`) LIKE '%".$valueToSearch."%'";
     $search_result = filterTable($query);
     
 }
@@ -59,7 +59,7 @@ function filterTable($query)
                     <td><?php echo $row['description'];?></td>
                     <td><?php echo $row['price'];?></td>
                     <td><?php echo $row['ordered_date'];?></td>
-                    <td></td>
+                    <td><?php echo $row['user_id'];?></td>
                 </tr>
                 <?php endwhile;?>
             </table>

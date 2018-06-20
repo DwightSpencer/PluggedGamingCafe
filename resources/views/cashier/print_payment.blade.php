@@ -38,6 +38,7 @@
         <th style="width:8%;text-align: center">Qty</th>
         <th style="width:16%;text-align: right">Price</th>
         <th style="width:18%;text-align: right">Total</th>
+        
     </tr>
     <tr style="font-size:14px">
         <th colspan="6" align="left">
@@ -55,6 +56,7 @@
                 ₱ {{number_format($orderDetail->quantity * $orderDetail->price* (1 - $orderDetail->discount / 100),2)}}</td>
             <?php if (empty($orderDetail->deleted_at)) $total += ($orderDetail->price * $orderDetail->quantity * (1 - $orderDetail->discount / 100)); ?>
         </tr>
+     
     @endforeach
 </table>
 <hr>

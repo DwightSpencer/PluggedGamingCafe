@@ -36,6 +36,7 @@
         <thead>
         <tr>
             <th style="margin: 0px;padding: 0px;vertical-align: middle" width="1px">Id</th>
+            <th> This order is for</th>
             <th>Description</th>
             <th style="text-align: center">Qty</th>
             <th style="text-align: right;">Price</th>
@@ -52,6 +53,15 @@
                         <input type="text" style="width: 30px;height: 18px" value="{{$orderDetail->id}}"
                                class="idRow" readonly="readonly"/>
                     </td>
+                    
+                     <td style="text-align: right">
+                         <select name="taskOption">
+                        <option value="1">Dine In</option>
+                        <option value="2">Take Out</option>
+                        $selectOption = $_POST['taskOption'];
+                         </select>
+                    </td>
+                    
                     <td style="@if($orderDetail->sent==1) color:red; @endif">
                         <input onchange="ajaxLoad('cashier/update-description/{{$orderDetail->id}}/'+this.value,'orderList')"
                                type="text" style="width: 100%;border:none;height: 30px"
@@ -94,16 +104,7 @@
                      
                     </th>
                 </tr>
-                <tr>
-                    <th style="text-align: right;padding-right: 20px">This Order is:</th>
-                    <th style="text-align: right">
-                    <select name="taskOption">
-  <option value="1">Dine In</option>
-  <option value="2">Take Out</option>
-  $selectOption = $_POST['taskOption'];
-</select>
-                    </th>
-                </tr>
+            
                 <tr>
                     <th style="text-align: right;padding-right: 20px">Customer:</th>
                     <th style="text-align: right">

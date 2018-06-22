@@ -6,7 +6,7 @@ if(isset($_POST['search']))
     // search in all table columns
     // using concat mysql function
 <<<<<<< HEAD
-    $query = "SELECT * FROM `order` WHERE CONCAT(`id`, `order_id`, `price`, `ordered_date`, `user_id`) LIKE '%".$valueToSearch."%'";
+    $query = "SELECT * FROM `order` WHERE CONCAT(`id`, `order_id`, `price`, `ordered_date`, `users_id`) LIKE '%".$valueToSearch."%'";
 =======
     $query = "SELECT order_details.quantity, order_details.order_id, order_details.description, order_details.price, order_details.ordered_date, users.username
 FROM order_details INNER JOIN users ON order_details.user_id = users.id WHERE CONCAT(order_details.quantity, order_details.id, order_details.order_id, order_details.price, order_details.ordered_date, users.username) LIKE '%".$valueToSearch."%'";

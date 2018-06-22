@@ -5,12 +5,9 @@ if(isset($_POST['search']))
     $valueToSearch = $_POST['valueToSearch'];
     // search in all table columns
     // using concat mysql function
-<<<<<<< HEAD
+
     $query = "SELECT * FROM `order` WHERE CONCAT(`id`, `order_id`, `price`, `ordered_date`, `users_id`) LIKE '%".$valueToSearch."%'";
-=======
-    $query = "SELECT order_details.quantity, order_details.order_id, order_details.description, order_details.price, order_details.ordered_date, users.username
-FROM order_details INNER JOIN users ON order_details.user_id = users.id WHERE CONCAT(order_details.quantity, order_details.id, order_details.order_id, order_details.price, order_details.ordered_date, users.username) LIKE '%".$valueToSearch."%'";
->>>>>>> parent of 56af65f... Revert "user id"
+
     $search_result = filterTable($query);
     
 }
@@ -40,6 +37,7 @@ function filterTable($query)
         </style>
     </head>
     <body>
+        
 
       
         <form action="sales-transaction" method="post">

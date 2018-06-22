@@ -24,12 +24,6 @@
         <td width="80px" style="text-align:right">Customer:</td>
         <td style="text-align:left">{{!empty($order->customer_id)&&$order->customer_id!='-1'?$order->customer->name:'General'}}</td>
     </tr>
-    <tr>
-        <td width="80px" style="text-align:right">This Order is:</td>
-        <td style="text-align:left">
-   $selectOption = $_POST['taskOption'];
-        </td>
-    </tr>
 </table>
 <table style="width:100%;margin-top:10px" border="0" cellspacing="0" cellpadding="2px">
     <tr style="font-size:13px">
@@ -38,7 +32,6 @@
         <th style="width:8%;text-align: center">Qty</th>
         <th style="width:16%;text-align: right">Price</th>
         <th style="width:18%;text-align: right">Total</th>
-        
     </tr>
     <tr style="font-size:14px">
         <th colspan="6" align="left">
@@ -56,7 +49,6 @@
                 ₱ {{number_format($orderDetail->quantity * $orderDetail->price* (1 - $orderDetail->discount / 100),2)}}</td>
             <?php if (empty($orderDetail->deleted_at)) $total += ($orderDetail->price * $orderDetail->quantity * (1 - $orderDetail->discount / 100)); ?>
         </tr>
-     
     @endforeach
 </table>
 <hr>
@@ -75,12 +67,16 @@
                     </tr>
                 @endif
                 <tr>
-                    <th style="text-align: right;padding-right: 20px">Net Amount(VAT Inclusive) (₱):</th>
-                    <th style="text-align: right">{{number_format($total*(1-$order->discount/100),2)}}</th>
+                    <th style="text-align: right;padding-right: 20px">Gross (₱):</th>
+                    <th style="text-align: right">{{number_format($total*(1-$order->discount/100)-$total*.12,2)}}</th>
                 </tr>
                 <tr>
                     <th style="text-align: right;padding-right: 20px">Less VAT (₱):</th>
                     <th style="text-align: right">{{number_format($total*(.12),2)}}</th>
+                </tr>
+                <tr>
+                    <th style="text-align: right;padding-right: 20px">Net Amount(VAT Inclusive) (₱):</th>
+                    <th style="text-align: right">{{number_format($total*(1-$order->discount/100),2)}}</th>
                 </tr>
                 @if(Session::get('usd')>0)
                     <tr>

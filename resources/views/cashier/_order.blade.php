@@ -52,6 +52,7 @@ if(isset($filename)){
             
         </tr>
         </thead>
+        
         @if(count($order)>0)
             <?php $total = 0; ?>
             <tbody>
@@ -100,7 +101,9 @@ if(isset($filename)){
             </tbody>
         @endif
     </table>
+
     @if(count($order)>0)
+    
         <div style="text-align: right;float: right;border-top: solid 1px whitesmoke;">
             <table width="100%">
             <tr>
@@ -128,6 +131,16 @@ if(isset($filename)){
                     </th>
                 </tr>
                 <tr>
+                    @if($total>100)
+                    
+                    <td align="center">
+                        <input onfocus="$(this).select()"
+                               onchange="ajaxLoad('cashier/update-price/{{$orderDetail->id}}/'+this.value,'orderList')"
+                               type="text" style="border: none;text-align: right"
+                               value="Free Board Games" readonly/>
+                               
+                    </td>
+                    @endif
                     <th style="text-align: right;padding-right: 20px">Total:</th>
                     <th style="text-align: right">₱ {{number_format($total*(1-$order->discount/100),2)}}</th>
                 </tr>

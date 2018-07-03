@@ -43,11 +43,11 @@ if(isset($filename)){
         <thead>
         <tr>
             <th style="margin: 0px;padding: 0px;vertical-align: middle" width="1px">Id</th>
-            <th>Description</th>
-            <th style="text-align: center">Qty</th>
-            <th style="text-align: center;">Price</th>
-            <th style="text-align: center">Total</th>
-            <th style="text-align: center">TakeOut</th>
+            <th style="text-align: left">Description</th>
+            <th style="text-align: left">Qty</th>
+            <th style="text-align: left">Price</th>
+            <th style="text-align: left">Total</th>
+            <th style="text-align: left">TakeOut</th>
             <th style="width: 1px"></th>
             
         </tr>
@@ -59,7 +59,7 @@ if(isset($filename)){
             @foreach($order->order_details()->orderBy('description')->get() as $orderDetail)
                 <tr style="color: darkblue;@if(($orderDetail->status=='Filled')) color: red; @endif @if(!empty($orderDetail->deleted_at)) text-decoration: line-through; @endif">
                     <td style="margin: 0px;padding: 0px;vertical-align: middle">
-                        <input type="text" style="width: 40px;height: 18px" value="{{$orderDetail->id}}"
+                        <input type="text" style="width: 20px;height: 18px" value="{{$orderDetail->id}}"
                                class="idRow" readonly/>
                     </td>
                     <td style="@if($orderDetail->sent==1) color:red; @endif">
@@ -67,20 +67,20 @@ if(isset($filename)){
                                type="text" style="width: 100%;border: none;height: 30px"
                                value="{{$orderDetail->description}}" readonly/>
                     </td>
-                    <td align="center">
+                    <td align="left">
                         <input onfocus="$(this).select()"
                                onchange="ajaxLoad('cashier/update-quantity/{{$orderDetail->id}}/'+this.value,'orderList')"
-                               type="number" step="1" style="width: 40px;border: none;height: 30px;text-align: center"
+                               type="number" step="1" style="width: 30px;border: none;height: 30px;text-align: left"
                                value="{{$orderDetail->quantity}}" />
                     </td>
-                    <td align="center">
+                    <td align="left">
                         <input onfocus="$(this).select()"
                                onchange="ajaxLoad('cashier/update-price/{{$orderDetail->id}}/'+this.value,'orderList')"
-                               type="text" style="width: 30px;border: none;height: 30px;text-align: right"
+                               type="text" style="width: 56px;border: none;height: 30px;text-align: left"
                                value="₱ {{number_format($orderDetail->price,2)}}" readonly/>
                     </td>
-                    <td align="center">
-                        <input type="text" style="width: 60px;border: none;height: 30px;text-align: center" readonly
+                    <td align="left">
+                        <input type="text" style="width: 70px;border: none;height: 30px;text-align: left" readonly
                                value="₱ {{number_format($orderDetail->price * $orderDetail->quantity*(1-$orderDetail->discount/100),2)}}" readonly="readonly"/>
 
                     </td>
@@ -131,23 +131,22 @@ if(isset($filename)){
                     </th>
                 </tr>
                 <tr>
-                    @if($total>100)
-                    
-                    <td align="center">
-                        <input onfocus="$(this).select()"
-                               onchange="ajaxLoad('cashier/update-price/{{$orderDetail->id}}/'+this.value,'orderList')"
-                               type="text" style="border: none;text-align: right"
-                               value="Free Board Games" readonly/>
-                               
-                    </td>
-                    @endif
                     <th style="text-align: right;padding-right: 20px">Total:</th>
                     <th style="text-align: right">₱ {{number_format($total*(1-$order->discount/100),2)}}</th>
                 </tr>
+                @if($total>100)
+                    <p>
+                        <i><input onfocus="$(this).select()"
+                               onchange="ajaxLoad('cashier/update-price/{{$orderDetail->id}}/'+this.value,'orderList')"
+                               type="text" style="border: none;text-align: right;padding-right: 20px"
+                               value="Free Board Games" readonly/></i>
+                    </p>
+                @endif
             </table>
         </div>
 </div>
 @endif
+
 <script>
     function getSelectedRows() {
         var selected = [];

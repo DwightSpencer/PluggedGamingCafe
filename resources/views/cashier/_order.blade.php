@@ -152,7 +152,6 @@ if(isset($filename)){
                                type="number" style="width: 30px;border: none;height: 30px;text-align: left"
                                value="{{$orderDetail->headcount}}" />
                     </td>
-                
                 </tr>
             </table>
         </div>

@@ -47,6 +47,9 @@ class UserController extends Controller
             }
             $user->username = Input::get('username');
             $user->role = Input::get('role');
+            $user->firstname = Input::get('firstname');
+            $user->lastname = Input::get('lastname');
+            $user->contact = Input::get('contact');
             if (Input::get('password') != '')
                 $user->password = bcrypt(Input::get('password'));
             $user->active = Input::get('active') ? 1 : 0;
@@ -72,6 +75,9 @@ class UserController extends Controller
             }
             $user = new User();
             $user->username = Input::get('username');
+            $user->firstname = Input::get('firstname');
+            $user->lastname = Input::get('lastname');
+            $user->contact = Input::get('contact');
             $user->role = Input::get('role');
             $user->password = bcrypt(Input::get('password'));
             $user->active = Input::get('active') ? 1 : 0;

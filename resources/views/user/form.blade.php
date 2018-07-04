@@ -1,4 +1,4 @@
-<h2 class="page-header">{{isset($user)?'Edit':'New'}}User</h2>
+<h2 class="page-header">{{isset($user)?'Edit':'New'}} User</h2>
 @if(isset($user))
     {!! Form::model($user,["id"=>"frm","class"=>"form-horizontal","method"=>"put"]) !!}
 @else
@@ -9,6 +9,27 @@
         {!! Form::label("username","Username",["class"=>"control-label col-md-2"]) !!}
         <div class="col-md-5">
             {!! Form::text("username",null,["class"=>"form-control required","id"=>"focus"]) !!}
+            <span id="username-error" class="help-block"></span>
+        </div>
+    </div>
+    <div class="form-group required" id="form-username-error">
+        {!! Form::label("firstname","First name",["class"=>"control-label col-md-2"]) !!}
+        <div class="col-md-5">
+            {!! Form::text("firstname",null,["class"=>"form-control required","id"=>"focus"]) !!}
+            <span id="username-error" class="help-block"></span>
+        </div>
+    </div>
+    <div class="form-group required" id="form-username-error">
+        {!! Form::label("lastname","Last name",["class"=>"control-label col-md-2"]) !!}
+        <div class="col-md-5">
+            {!! Form::text("lastname",null,["class"=>"form-control required","id"=>"focus"]) !!}
+            <span id="username-error" class="help-block"></span>
+        </div>
+    </div>
+    <div class="form-group required" id="form-username-error">
+        {!! Form::label("contact","Contact No.",["class"=>"control-label col-md-2"]) !!}
+        <div class="col-md-5">
+            {!! Form::text("contact",null,["class"=>"form-control required","id"=>"focus"]) !!}
             <span id="username-error" class="help-block"></span>
         </div>
     </div>

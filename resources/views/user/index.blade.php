@@ -11,7 +11,7 @@
     <div class="input-group">
         <input class="form-control" id="search" value="{{ Session::get('user_search') }}"
                onkeydown="if (event.keyCode == 13) ajaxLoad('{{url('user')}}?ok=1&search='+this.value)"
-               placeholder="Search..."
+               placeholder="Search username"
                type="text">
 
         <div class="input-group-btn">
@@ -36,7 +36,26 @@
         </th>
         <th class="hidden-xs hidden-sm">Role</th>
         <th width="50" align="center">Active</th>
+        <th class="hidden-xs hidden-sm">
+            <a href="javascript:ajaxLoad('user?field=firstname&sort={{Session::get("user_sort")=="asc"?"desc":"asc"}}')">
+                First Name
+            </a>
+            <i style="font-size: 12px"
+               class="glyphicon  {{ Session::get('user_field')=='firstname'?(Session::get('user_sort')=='asc'?'glyphicon-sort-by-alphabet':'glyphicon-sort-by-alphabet-alt'):'' }}">
+            </i>
+        </th>
+        <th class="hidden-xs hidden-sm">
+            <a href="javascript:ajaxLoad('user?field=lastname&sort={{Session::get("user_sort")=="asc"?"desc":"asc"}}')">
+                Last Name
+            </a>
+            <i style="font-size: 12px"
+               class="glyphicon  {{ Session::get('user_field')=='lastname'?(Session::get('user_sort')=='asc'?'glyphicon-sort-by-alphabet':'glyphicon-sort-by-alphabet-alt'):'' }}">
+            </i>
+        </th>
+        <th class="hidden-xs hidden-sm">Contact No.</th>
         <th width="140px"></th>
+        
+        
     </tr>
     </thead>
     <tbody>
@@ -50,6 +69,9 @@
                 {!!$user->active?"<i  style='color:green' class='glyphicon glyphicon-ok'></i>":"<i style='color: red'
                                                                                                  class='glyphicon glyphicon-remove'></i>"!!}
             </td>
+            <td>{{$user->firstname}}</td>
+            <td>{{$user->lastname}}</td>
+            <td>{{$user->contact}}</td>
             <td style="text-align: center">
                 <a class="btn btn-primary btn-xs" title="Edit"
                    href="javascript:ajaxLoad('user/update/{{$user->id}}')">

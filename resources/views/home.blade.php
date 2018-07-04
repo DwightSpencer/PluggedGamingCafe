@@ -1,7 +1,10 @@
 <div class="row-fluid">
-    <h2 class="page-header">Sale Graph Report (15 days)
+    <h2 class="page-header">Sale Graph Report 
         <div style="border: 1px double gray;background: whitesmoke;padding: 10px;margin: 0px;text-align: right;float: right">
             ₱ {{number_format($order['Total']['total'],2)}}
+        </div>
+        <div style="border: 1px double gray;background: whitesmoke;padding: 10px;margin: 5px;text-align: right;float: right">
+            {{number_format($order['THC']['headcount'])}}
         </div>
     </h2>
 
@@ -9,13 +12,13 @@
 </div>
 <div class="row-fluid">
     <div class="col-md-7">
-        <h4 class="page-header">Top 20 Product</h4>
+        <h4 class="page-header">Top Products</h4>
         <table class="table">
             <thead>
             <tr>
                 <th> No</th>
                 <th> Description</th>
-                <th style="text-align: center"> Quantity</th>
+                <th style="text-align: center"> Net Amount</th>
             </tr>
             </thead>
             <tbody>
@@ -24,7 +27,7 @@
                 <tr>
                     <td>{{$i++}}</td>
                     <td>{!! $orderDetail->product_id?$orderDetail->description:'<b>'.$orderDetail->description.'</b>'!!}</td>
-                    <td align="center">{{$orderDetail->total}}</td>
+                    <td align="center">₱ {{number_format($orderDetail->total)}}</td>
                 </tr>
             @endforeach
             </tbody>
@@ -59,7 +62,7 @@
             x: -20 //center
         },
         subtitle: {
-            text: '',
+            text: '{{date("M d, Y",strtotime(Session::get('to')))}} <br> by: {{ucwords(Auth::user()->username)}}',
             x: -20
         },
         xAxis: {

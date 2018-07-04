@@ -107,6 +107,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('update-discount-detail/{id}/{value}', 'CashierController@updateDiscountDetail');
         Route::get('update-customer/{id}/{value}', 'CashierController@updateCustomer');
         Route::get('update-discount/{id}/{value}', 'CashierController@updateDiscount');
+        Route::get('update-headcount/{id}/{value}', 'CashierController@updateheadCount');
         Route::delete('delete/{id}', 'CashierController@delete');
         Route::match(['get', 'post'], 'open', 'CashierController@open');
         Route::match(['get', 'post'], 'pay', 'CashierController@pay');

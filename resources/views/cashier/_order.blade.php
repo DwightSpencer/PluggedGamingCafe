@@ -145,13 +145,14 @@ if(isset($filename)){
                 @endif
                 </tr>
                 <tr>
-                <!-- <th style="text-align: right;padding-right: 20px">Head Count:</th>
+                 <th style="text-align: right;padding-right: 20px">Head Count:</th>
                 <td align="right">
                         <input onfocus="$(this).select()"
-                               type="number" step="1" style="width: 30px;border: none;height: 30px;text-align: left"
-                               value="1" />
+                        onchange="ajaxLoad('cashier/update-headcount/{{$orderDetail->id}}/'+this.value,'orderList')"
+                               type="number" style="width: 30px;border: none;height: 30px;text-align: left"
+                               value="{{$orderDetail->headcount}}" />
                     </td>
-                -->
+                
                 </tr>
             </table>
         </div>

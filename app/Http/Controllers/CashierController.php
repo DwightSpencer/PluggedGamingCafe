@@ -145,6 +145,17 @@ class CashierController extends Controller
         return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
     }
 
+    public function updateheadCount($id, $value)
+    {
+        $orderDetail = OrderDetail::where('id', $id)->first();
+        if (count($orderDetail)) {
+            $orderDetail->headcount = $value;
+            $orderDetail->save();
+        }
+        return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
+    }
+
+
     public function switchTable($id)
     {
         Session::put('table_id', $id);

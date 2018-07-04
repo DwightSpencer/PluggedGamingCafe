@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 04, 2018 at 02:48 PM
+-- Generation Time: Jul 04, 2018 at 03:06 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -716,7 +716,7 @@ INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `description`, `qua
 (479, 110, 1257, 'Bacon', 1, '120.00', '2018-07-04 07:44:42', 0, '2018-07-04 07:44:42', '2018-07-04 07:44:52', '2018-07-04 07:44:52', 3),
 (480, 111, 1257, 'Bacon (Takeout)', 1, '120.00', '2018-07-04 07:44:42', 0, '2018-07-04 07:49:26', '2018-07-04 08:54:07', NULL, 3),
 (481, 112, 1257, 'Bacon', 1, '120.00', '2018-07-04 07:52:24', 0, '2018-07-04 07:52:24', '2018-07-04 12:01:17', '2018-07-04 12:01:17', 3),
-(482, 113, 1307, 'PS4', 1, '80.00', '2018-07-04 07:57:28', 0, '2018-07-04 07:57:28', '2018-07-04 12:42:09', NULL, 3),
+(482, 113, 1307, 'PS4', 1, '80.00', '2018-07-04 07:57:28', 0, '2018-07-04 07:57:28', '2018-07-04 12:58:43', '2018-07-04 12:58:43', 3),
 (483, 111, 1314, 'Jenga', 1, '100.00', '2018-07-04 07:49:42', 0, '2018-07-04 08:05:57', '2018-07-04 08:47:56', '2018-07-04 08:47:56', 3),
 (484, 111, 1319, 'Monopoly', 1, '100.00', '2018-07-04 07:49:42', 0, '2018-07-04 08:07:21', '2018-07-04 08:47:59', '2018-07-04 08:47:59', 3),
 (485, 111, 1275, 'Fried Chicken', 1, '160.00', '2018-07-04 07:49:42', 0, '2018-07-04 08:53:28', '2018-07-04 08:53:28', NULL, 3),
@@ -925,7 +925,7 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `role`, `active`, `created_at`, `updated_at`) VALUES
 (1, 'super', '$2y$10$Zy1XTuyhK3zxTdkkmFicmOXpIEtRpwzoNTZPuna/L9i08C/Bp8aCC', 'aVFtxDiq67bX0LZJv8iRmsx9kyaQZx8GCUO9rjMge9iRchYSVM2e5jRkIW5c', 'SuperAdmin', 1, '2016-03-03 10:18:30', '2017-11-22 13:39:52'),
 (2, 'admin', '$2y$10$OzvezM1JTpSyLjBnuxueg.NC9yDNovAGWSi1FFw6yZczE5y6tMpfO', '2pwG5x5Ladmfc4OzVFJQU0OSv05bQubNXwH2Ln7GG3s2ghID2GDEUW6BMJoJ', 'Admin', 1, '2016-06-04 11:24:02', '2017-11-24 00:43:43'),
-(3, 'Dwight', '$2y$10$RGlUQWowwJ8ZCNcll9ByN.rvjp2ZN7HRMonM6wrF5T2ubIXLK8Sh.', 'sIhLSMgwU6K6jL7Oeeu4C3IOE08zw9DZTyvId9XxTmQuJJiMXf0su27ueR4o', 'Cashier', 1, '2016-06-04 11:24:02', '2018-07-04 08:14:19'),
+(3, 'cashier', '$2y$10$RGlUQWowwJ8ZCNcll9ByN.rvjp2ZN7HRMonM6wrF5T2ubIXLK8Sh.', 'yUlmn8Qr2IFWWF2FSf7YK7Hi3Ln6aA5IUmkrTasSDnf7OTf55CXf459O0kCz', 'Cashier', 1, '2016-06-04 11:24:02', '2018-07-04 13:04:59'),
 (4, 'cashier2', '$2y$10$1ymw8qTMQJCWhm8/vRXdFeaafdOu/3kJT7JS5Iv954f6/jFdYxrSa', 'ZeDwrULdwTT6Tix1AgyR245iWo75iV5apop425JZp2IEMtSgCd0If9DROSgJ', 'Cashier', 1, '2018-03-29 17:16:47', '2018-03-29 17:16:47');
 
 --

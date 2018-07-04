@@ -3,9 +3,6 @@
         <div style="border: 1px double gray;background: whitesmoke;padding: 10px;margin: 0px;text-align: right;float: right">
             ₱ {{number_format($order['Total']['total'],2)}}
         </div>
-        <div style="border: 1px double gray;background: whitesmoke;padding: 10px;margin: 5px;text-align: right;float: right">
-            {{number_format($order['THC']['headcount'])}}
-        </div>
     </h2>
 
     <div id="line"></div>

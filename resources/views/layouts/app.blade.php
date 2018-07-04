@@ -91,12 +91,12 @@
                             <li class="nav_report_sale-history">
                                 <a href="#report/sale-history">Sale History Report</a>
                             </li>
-                            <li class="nav_report_sale-deleted-report">
+                            <!--<li class="nav_report_sale-deleted-report">
                                 <a href="#report/sale-deleted-report">Sale Deleted Report</a>
                             </li>
                             <li class="nav_report_sale-discount">
                                 <a href="#report/sale-discount">Sale Discount Report</a>
-                            </li>
+                            </li>-->
                             <li class="nav_report_sale-graph">
                                 <a href="#report/sale-graph">Sale Graph Report</a>
                             </li>

@@ -53,7 +53,7 @@ class CashierController extends Controller
                                  style="margin: 5px 5px 0px 5px"/>
                             <div style="margin:20px">
                                 <span style="color: red;font-size: 15px"
-                                      class="pull-right">$' . number_format($menu->unitprice, 2) . '</span>
+                                      class="pull-right">₱' . number_format($menu->unitprice, 2) . '</span>
                                 <div>' . $menu->name . ' <span style="color: gray">(' . $menu->id . ')</span></div>
                             </div></li>';
         }

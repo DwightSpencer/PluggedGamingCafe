@@ -50,6 +50,7 @@ if(isset($filename)){
             <th style="text-align: left">TakeOut</th>
             <th style="width: 1px"></th>
             
+
         </tr>
         </thead>
         
@@ -142,6 +143,16 @@ if(isset($filename)){
                                value="Free Board Games" readonly/></i>
                     </p>
                 @endif
+                </tr>
+                <tr>
+                <!-- <th style="text-align: right;padding-right: 20px">Head Count:</th>
+                <td align="right">
+                        <input onfocus="$(this).select()"
+                               type="number" step="1" style="width: 30px;border: none;height: 30px;text-align: left"
+                               value="1" />
+                    </td>
+                -->
+                </tr>
             </table>
         </div>
 </div>

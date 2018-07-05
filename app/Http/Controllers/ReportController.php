@@ -160,7 +160,9 @@ class ReportController extends Controller
 
     public function viewDetail($id)
     {
-        return view('report.view_detail', ['order' => Order::find($id)]);
+        return view('report.view', ['order' => Order::find($id)]);
+        
+        
     }
 
     public function saleDetail()

@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <th style="text-align: right;border-top: none">Cash in:</th>
-                    <td style="border-top: none">$ {{$order->usd}}</td>
+                    <td style="border-top: none">₱ {{$order->usd}}</td>
                 </tr>
             </table>
         </div>

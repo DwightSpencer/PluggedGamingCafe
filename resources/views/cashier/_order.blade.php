@@ -47,7 +47,7 @@ if(isset($filename)){
             <th style="text-align: left">Qty</th>
             <th style="text-align: left">Price</th>
             <th style="text-align: left">Total</th>
-            <th style="text-align: left">TakeOut</th>
+            <th style="text-align: left">Options</th>
             <th style="width: 1px"></th>
             
 
@@ -86,8 +86,9 @@ if(isset($filename)){
 
                     </td>
                     <td align="center">
-                    <input type="checkbox" onchange="ajaxLoad('cashier/update-description/{{$orderDetail->id}} Takeout/'+this.value,)" style="width: 18px;height: 18px" value="{{$orderDetail->description}} (Takeout)"
-                               class="idRow"/>
+                    <a class="btn btn-primary pay"
+                         data-toggle="modal" data-target="#modal" href="cashier/options" style="width: 80px;border: none;height: 20px;text-align: center">
+                        
                     
                     </td>
                     <td style="text-align: center;padding-top: 15px">

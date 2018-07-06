@@ -223,6 +223,19 @@ class CashierController extends Controller
 //        }
         return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
     }
+    public function options(Request $request)
+    {
+        
+        $order = Order::find(Session::get('order_id'));
+        $order->status = 'Printed';
+        $order->checked_out = date('Y-m-d H:i:s');
+        $order->table->status = 'Printed';
+        $order->push();
+        return View('cashier.options', ['order' => $order]);
+        
+        
+        
+    }
 
     public function open(Request $request)
     {

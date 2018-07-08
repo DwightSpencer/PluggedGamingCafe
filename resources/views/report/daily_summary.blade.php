@@ -9,10 +9,10 @@
                    id="report_from"/>
         </div>
     </div>
-    <div class="form-group col-sm-3">
+    <!--<div class="form-group col-sm-3">
         <a href="javascript:window.open('report/print-daily-summary?report_from='+$('#report_from').val(),'_blank');"
            class="btn btn-primary"><i class="glyphicon glyphicon-print"></i> Print</a>
-    </div>
+    </div>-->
 </div>
 <h2 style="text-align: center;padding: 10px;background: whitesmoke">
     ₱ {{number_format($orders['Total']['total'],2)}}</h2>

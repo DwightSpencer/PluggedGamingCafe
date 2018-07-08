@@ -62,7 +62,7 @@
             <td align="right">
                 ₱ {{number_format(($amount->total - $amount->discount) * (1-$order->discount/100),2)}}</td>
             <!--<td>{{$order->customer_id && $order->customer?$order->customer->name:''}}</td> -->
-            <td>{{$order->user?$order->user->firstname:''}}</td>
+            <td>{{$order->user?$order->user->fullname:''}}</td>
         </tr>
     @endforeach
     </tbody>

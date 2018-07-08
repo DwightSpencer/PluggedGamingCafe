@@ -41,7 +41,7 @@
                                         width="100%"
                                         class="img-rounded"/></td>
                             <td>
-                                <b style="font-size: 180%;color: white">{{ucwords(Auth::user()->firstname)}}</b><br/>
+                                <b style="font-size: 180%;color: white">{{ucwords(Auth::user()->fullname)}}</b><br/>
                                 <a href="{{url('/logout')}}" style="font-size: 15px;color: white;" onclick="event.preventDefault();
                                              document.getElementById('logout-form').submit();"><i
                                             class="glyphicon glyphicon-log-out"></i>
@@ -95,8 +95,8 @@
                                 <a href="#report/sale-deleted-report">Sale Deleted Report</a>
                             </li>
                             <li class="nav_report_sale-discount">
-                                <a href="#report/sale-discount">Sale Discount Report</a>-->
-                            </li>
+                                <a href="#report/sale-discount">Sale Discount Report</a>
+                            </li>-->
                             
                             <li class="nav_report_sale-graph">
                                 <a href="#report/sale-graph">Sale Graph Report</a>

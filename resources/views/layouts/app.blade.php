@@ -95,8 +95,8 @@
                                 <a href="#report/sale-deleted-report">Sale Deleted Report</a>
                             </li>
                             <li class="nav_report_sale-discount">
-                                <a href="#report/sale-discount">Sale Discount Report</a>
-                            </li>-->
+                                <a href="#report/sale-discount">Sale Discount Report</a>-->
+                            </li>
                             
                             <li class="nav_report_sale-graph">
                                 <a href="#report/sale-graph">Sale Graph Report</a>

@@ -1,6 +1,5 @@
 <?php
 namespace App\Http\Controllers;
-
 use App\Customer;
 use App\Item;
 use App\Product;
@@ -16,7 +15,6 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-
 class CashierController extends Controller
 {
     public function index()
@@ -32,7 +30,6 @@ class CashierController extends Controller
             'order' => $order
         ]);
     }
-
     public function products()
     {
         Session::put('menuCategory_id', Input::has('menuCategory_id') ? Input::get('menuCategory_id') : (Session::has('menuCategory_id') ? Session::get('menuCategory_id') : env('DEFAULT_MENU_CATEGORY')));
@@ -60,7 +57,6 @@ class CashierController extends Controller
         $str .= '</ul>';
         return $str;
     }
-
     public function order($id)
     {
         $menu = Product::find($id);
@@ -83,13 +79,15 @@ class CashierController extends Controller
                 $order_detail->ordered_date = $order->created_at;
                 if ($id > 0)
                     $order_detail->quantity = 1;
+              
                 $order_detail->description = $menu->name;
                 $order_detail->price = $menu->unitprice;
                 $order_detail->user_id = Auth::user()->id;
                 $order_detail->save();
             } else {
-                if ($id > 0)
+                if ($id < 0)
                     $order_detail->quantity += 1;
+                
                 $order_detail->user_id = Auth::user()->id;
                 $order_detail->save();
             }
@@ -97,7 +95,6 @@ class CashierController extends Controller
         }
         return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
     }
-
     public function updateDescription($id, $value)
     {
         $orderDetail = OrderDetail::where('id', $id)->first();
@@ -107,17 +104,84 @@ class CashierController extends Controller
         }
         return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
     }
-
     public function updateQuantity($id, $value)
     {
         $orderDetail = OrderDetail::where('id', $id)->first();
         if (count($orderDetail)) {
+            if ($value<1) {$value=1;}
             $orderDetail->quantity = $value;
             $orderDetail->save();
         }
         return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
     }
-
+    public function updateOwner($id, $value)
+    {
+        
+        $orderDetail = OrderDetail::where('id', $id)->first();
+        $allOPS=$orderDetail->Owner+$orderDetail->PWD+$orderDetail->Senior;
+        if (count($orderDetail)) {
+        if ($allOPS>$orderDetail->quantity) 
+            {$value=$orderDetail->quantity-$orderDetail->PWD-$orderDetail->Senior;}
+        if ($value<0) {$value=0;}
+            $orderDetail->Owner = $value;
+            $orderDetail->save();
+        } 
+            $value=$orderDetail->Owner*1*$orderDetail->Price+$orderDetail->PWD*.2*$orderDetail->Price+$orderDetail->Senior*.2*$orderDetail->Price;
+            $orderDetail->discount = $value;
+            $orderDetail->save(); 
+        return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
+    }
+    public function updatePWD($id, $value)
+    {
+        $orderDetail = OrderDetail::where('id', $id)->first();
+       
+        $allOPS=$orderDetail->Owner+$orderDetail->PWD+$orderDetail->Senior;
+        if ($allOPS>$orderDetail->quantity) {$value=$orderDetail->quantity-$orderDetail->Owner-$orderDetail->Senior;}
+        if ($value<0) $value=0; 
+            $orderDetail->PWD = $value;
+            $orderDetail->save();
+        return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
+    }
+    public function updateSenior($id, $value)
+    {
+        $orderDetail = OrderDetail::where('id', $id)->first();
+        $allOPS=$orderDetail->Owner+$orderDetail->PWD+$orderDetail->Senior;
+        if ($allOPS>$orderDetail->quantity) {$value=$orderDetail->quantity-$orderDetail->Owner-$orderDetail->PWD;}
+        if ($value<0) $value=0; 
+            $orderDetail->Senior = $value;
+            $orderDetail->save();
+            
+        return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
+    }
+    
+    public function updateDisc($id, $value)
+    {
+        $orderDetail = OrderDetail::where('id', $id)->first();
+        $value=$orderDetail->Owner*1*$orderDetail->Price+$orderDetail->PWD*.2*$orderDetail->Price+$orderDetail->Senior*.2*$orderDetail->Price;
+        $orderDetail->discount = $value;
+        $orderDetail->save(); 
+        return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
+    }
+    public function updateSrv($id, $value)
+    {
+        $orderDetail = OrderDetail::where('id', $id)->first();
+        if (count($orderDetail)) {
+            if ($orderDetail->Srv>$orderDetail->quantity) {$value=$orderDetail->quantity;}
+            if ($orderDetail->Srv<0) {$value=0;}
+            $orderDetail->Srv = $value;
+            $orderDetail->save();
+        }
+        return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
+    }
+    public function updatePax($id, $value)
+    {
+        $orderDetail = OrderDetail::where('id', $id)->first();
+        if (count($orderDetail)) {
+            $orderDetail->Pax = $value;
+            $orderDetail->save();
+        }
+        return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
+    }
     public function updatePrice($id, $value)
     {
         $orderDetail = OrderDetail::where('id', $id)->first();
@@ -127,7 +191,6 @@ class CashierController extends Controller
         }
         return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
     }
-
     public function updateCustomer($id, $value)
     {
         $order = Order::find($id);
@@ -136,26 +199,6 @@ class CashierController extends Controller
         $order->save();
         return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
     }
-
-    public function updateDiscount($id, $value)
-    {
-        $order = Order::find($id);
-        $order->discount = $value;
-        $order->save();
-        return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
-    }
-
-    public function updateheadCount($id, $value)
-    {
-        $orderDetail = OrderDetail::where('id', $id)->first();
-        if (count($orderDetail)) {
-            $orderDetail->headcount = $value;
-            $orderDetail->save();
-        }
-        return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
-    }
-
-
     public function switchTable($id)
     {
         Session::put('table_id', $id);
@@ -187,13 +230,10 @@ class CashierController extends Controller
         Session::put('order_id', $neworder->id);
         return view('cashier._order', ['order' => $neworder]);
     }
-
     public function table()
     {
         return view('cashier.table', ['tables' => Table::orderBy('name')->get()]);
-
     }
-
     public function selectTable($id)
     {
         Session::put('table_id', $id);
@@ -206,13 +246,11 @@ class CashierController extends Controller
         }
         return view('cashier._order', ['order' => $order]);
     }
-
     public function changeTable()
     {
         Session::put('selected_items', Input::get('ids'));
         return view('cashier.change_table', ['tables' => Table::where('id', '!=', Session::get('table_id'))->orderBy('name')->get()]);
     }
-
     public function delete($id)
     {
         $order_detail = OrderDetail::find($id);
@@ -223,20 +261,6 @@ class CashierController extends Controller
 //        }
         return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
     }
-    public function options(Request $request)
-    {
-        
-        $order = Order::find(Session::get('order_id'));
-        $order->status = 'Printed';
-        $order->checked_out = date('Y-m-d H:i:s');
-        $order->table->status = 'Printed';
-        $order->push();
-        return View('cashier.options', ['order' => $order]);
-        
-        
-        
-    }
-
     public function open(Request $request)
     {
         if ($request->isMethod('get'))
@@ -275,12 +299,10 @@ class CashierController extends Controller
             return view('cashier._order', ['order' => $order]);
         }
     }
-
     public function returnOrder()
     {
         return view('cashier._order', ['order' => []]);
     }
-
     public function printPayment()
     {
         DB::beginTransaction();
@@ -306,7 +328,6 @@ class CashierController extends Controller
         }
         return view('cashier.print_payment', ['order' => $order]);
     }
-
     public function pay(Request $request)
     {
         if ($request->isMethod('get')) {
@@ -335,7 +356,6 @@ class CashierController extends Controller
             Session::put('change_us', $change);
         }
     }
-
     public function getPrint()
     {
         $order = Order::find(Session::get('order_id'));
@@ -345,7 +365,6 @@ class CashierController extends Controller
         $order->push();
         return View('cashier.print', ['order' => $order]);
     }
-
     public function reloadOrder()
     {
         return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);

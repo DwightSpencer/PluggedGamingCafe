@@ -86,7 +86,7 @@
                 @endif
                 @if(Session::get('change_us')>0)
                     <tr>
-                        <th style="text-align: right;padding-right: 20px">Cash Return (₱):</th>
+                        <th style="text-align: right;padding-right: 20px">Change (₱):</th>
                         <th style="text-align: right">
                             {{number_format(Session::get('change_us'),2)}}</th>
                     </tr>

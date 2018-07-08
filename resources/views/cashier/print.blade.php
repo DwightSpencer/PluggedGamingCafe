@@ -1,10 +1,10 @@
-<center>
+<!--<center>
     <img src="{{asset('images/logo.png')}}" height=80px" width="150px"/>
     <h2 style="font-size:16px;margin:0">Plugged Board Cafe and Gaming Lounge</h2>
     <i style="font-size:11px;width:90%;display:block">Address: 16 Legarda Road, Baguio City
         Contact Number: 09178531817 </i>
     <h3 style="padding: 0px;margin: 0px"></h3>
-</center>
+</center> -->
 <hr style="size:2px;border:inset;margin-top: 0px;padding-top: 0px">
 <table style="width:100%;font-size:12px">
     <tr>

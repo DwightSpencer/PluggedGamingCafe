@@ -951,7 +951,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `role`, `active`, `created_at`, `updated_at`, `firstname`, `lastname`, `contact`) VALUES
-(1, 'super', '$2y$10$Zy1XTuyhK3zxTdkkmFicmOXpIEtRpwzoNTZPuna/L9i08C/Bp8aCC', 'nfPWHpabxfjsx1197M4f5sYVPjSAnwVXLxquw18jUXgsVRVDxnO8lBSBNMWf', 'SuperAdmin', 1, '2016-03-03 10:18:30', '2017-11-22 13:39:52', '', '', '0'),
+(1, 'super', '$2y$10$Zy1XTuyhK3zxTdkkmFicmOXpIEtRpwzoNTZPuna/L9i08C/Bp8aCC', 'nfPWHpabxfjsx1197M4f5sYVPjSAnwVXLxquw18jUXgsVRVDxnO8lBSBNMWf', 'SuperAdmin', 1, '2016-03-03 10:18:30', '2017-11-22 13:39:52', 'Lance', 'Palor', '9178531817'),
 (2, 'admin', '$2y$10$OzvezM1JTpSyLjBnuxueg.NC9yDNovAGWSi1FFw6yZczE5y6tMpfO', 'xUnkMNqtuVoQkr99MyXIq9xskNZq9cgaGSsNsCupjTyQdSOkk5NvuFjT6kph', 'Admin', 1, '2016-06-04 11:24:02', '2018-07-04 15:29:32', 'Lance', 'Palor', '9178531817'),
 (3, 'cashier', '$2y$10$RGlUQWowwJ8ZCNcll9ByN.rvjp2ZN7HRMonM6wrF5T2ubIXLK8Sh.', 'o4vfnu3ykP66qxjkPu17WIkyc3jp5PMMt46O0ymtc19RIi9syWwyHFizUNCq', 'Cashier', 1, '2016-06-04 11:24:02', '2018-07-04 15:30:40', 'Lebron', 'James', '9232323230'),
 (4, 'cashier2', '$2y$10$1ymw8qTMQJCWhm8/vRXdFeaafdOu/3kJT7JS5Iv954f6/jFdYxrSa', 'ZeDwrULdwTT6Tix1AgyR245iWo75iV5apop425JZp2IEMtSgCd0If9DROSgJ', 'Cashier', 1, '2018-03-29 17:16:47', '2018-07-04 15:31:12', 'Jeremiah', 'Pimentel', '9322322322');

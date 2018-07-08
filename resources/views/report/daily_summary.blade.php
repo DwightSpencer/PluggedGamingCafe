@@ -23,7 +23,6 @@
             <tr>
                 <th style="text-align: center">Category</th>
                 <th style="text-align: center">Total</th>
-                <th style="text-align: center">Discount</th>
             </tr>
             </thead>
             <tbody>

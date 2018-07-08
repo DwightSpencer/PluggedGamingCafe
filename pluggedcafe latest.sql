@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 08, 2018 at 12:53 PM
+-- Generation Time: Jul 08, 2018 at 01:56 PM
 -- Server version: 10.1.31-MariaDB
 -- PHP Version: 7.2.4
 
@@ -232,7 +232,7 @@ INSERT INTO `orders` (`id`, `table_id`, `status`, `customer_id`, `discount`, `us
 (142, 65, 'Completed', NULL, 0, '460.00', 3, '2018-07-07 06:33:53', '2018-07-07 06:34:24', '2018-07-07 06:33:53', '2018-07-07 06:34:09'),
 (143, 79, 'Completed', 3, 20, '400.00', 3, '2018-07-07 13:09:37', '2018-07-07 13:09:51', '2018-07-07 13:09:37', '2018-07-07 13:09:46'),
 (144, 65, 'Completed', NULL, 0, '450.00', 3, '2018-07-08 07:55:24', '2018-07-08 08:21:03', '2018-07-08 07:55:24', '2018-07-08 08:20:57'),
-(145, 65, 'Busy', NULL, 0, '0.00', 3, '2018-07-08 08:23:39', '2018-07-08 08:23:39', '2018-07-08 08:23:39', NULL);
+(145, 65, 'Completed', NULL, 0, '920.00', 3, '2018-07-08 08:23:39', '2018-07-08 11:39:15', '2018-07-08 08:23:39', '2018-07-08 11:39:03');
 
 -- --------------------------------------------------------
 
@@ -851,7 +851,9 @@ INSERT INTO `order_details` (`id`, `order_id`, `product_id`, `description`, `qua
 (588, 143, 1271, 'Kaldereta Pasta', 1, '160.00', '2018-07-07 13:09:37', 0, '2018-07-07 13:09:38', '2018-07-07 13:09:44', NULL, 3, 0, 0, 0, 0, 0),
 (589, 144, 1269, 'Carbonara', 3, '150.00', '2018-07-08 07:55:24', 0, '2018-07-08 07:55:24', '2018-07-08 08:20:51', NULL, 3, 1, 1, 2, 0, 3),
 (590, 145, 1271, 'Kaldereta Pasta', 1, '160.00', '2018-07-08 08:23:39', 0, '2018-07-08 08:23:39', '2018-07-08 08:37:36', NULL, 3, 0, 0, 0, 0, 4),
-(591, 145, 1269, 'Carbonara', 3, '150.00', '2018-07-08 08:23:39', 0, '2018-07-08 08:23:39', '2018-07-08 08:36:35', NULL, 3, 0, 0, 0, 0, 1);
+(591, 145, 1269, 'Carbonara', 3, '150.00', '2018-07-08 08:23:39', 0, '2018-07-08 08:23:39', '2018-07-08 08:36:35', NULL, 3, 0, 0, 0, 0, 1),
+(592, 145, 1273, 'Creamy Mushroom Chicken Rice Toppings', 1, '150.00', '2018-07-08 08:23:39', 0, '2018-07-08 11:38:56', '2018-07-08 11:38:56', NULL, 3, NULL, 0, 0, 0, 1),
+(593, 145, 1277, 'Fish Fillet', 1, '160.00', '2018-07-08 08:23:39', 0, '2018-07-08 11:38:57', '2018-07-08 11:38:57', NULL, 3, NULL, 0, 0, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -1017,7 +1019,7 @@ CREATE TABLE `tables` (
 
 INSERT INTO `tables` (`id`, `name`, `status`, `created_at`, `updated_at`) VALUES
 (64, '3', 'Free', '2018-03-26 08:21:54', '2018-07-07 05:11:56'),
-(65, '4', 'Busy', '2018-03-26 08:21:57', '2018-07-08 08:23:39'),
+(65, '4', 'Free', '2018-03-26 08:21:57', '2018-07-08 11:39:15'),
 (70, '6', 'Free', '2018-03-26 08:22:12', '2018-07-07 06:06:42'),
 (71, 'Game Area 1', 'Free', '2018-03-29 17:20:54', '2018-07-04 16:44:33'),
 (72, 'Game Area 2', 'Free', '2018-03-29 17:21:08', '2018-07-04 01:21:15'),
@@ -1046,8 +1048,7 @@ CREATE TABLE `users` (
   `active` tinyint(1) DEFAULT '0',
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
-  `firstname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `lastname` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `fullname` varchar(23) COLLATE utf8_unicode_ci NOT NULL,
   `contact` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -1055,11 +1056,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `role`, `active`, `created_at`, `updated_at`, `firstname`, `lastname`, `contact`) VALUES
-(1, 'super', '$2y$10$Zy1XTuyhK3zxTdkkmFicmOXpIEtRpwzoNTZPuna/L9i08C/Bp8aCC', 'm8y9HcqQ30lePmEMLutK0JEIJk6RYKyMulD2mga5EOPPPcoIlJZKeOYWENeD', 'SuperAdmin', 1, '2016-03-03 10:18:30', '2017-11-22 13:39:52', '', '', '9178531817'),
-(2, 'admin', '$2y$10$OzvezM1JTpSyLjBnuxueg.NC9yDNovAGWSi1FFw6yZczE5y6tMpfO', 'mpPIlgw29GgfnjtakRNN5J4A5uKZ8StHENvMfoDNsdPHeS71ekPwVFFEnyQh', 'Admin', 1, '2016-06-04 11:24:02', '2018-07-07 12:05:40', 'Lance', 'Palor', '9178531817'),
-(3, 'cashier', '$2y$10$RGlUQWowwJ8ZCNcll9ByN.rvjp2ZN7HRMonM6wrF5T2ubIXLK8Sh.', 'GQPzQo38cEN25kEFTHBKU8ByCEB7N1Yz3zeNbfUjHUHPTrVMt5OCeuBOpuAF', 'Cashier', 1, '2016-06-04 11:24:02', '2018-07-07 12:09:44', 'JC', 'Ramos', '9232323230'),
-(4, 'cashier2', '$2y$10$1ymw8qTMQJCWhm8/vRXdFeaafdOu/3kJT7JS5Iv954f6/jFdYxrSa', 'ZeDwrULdwTT6Tix1AgyR245iWo75iV5apop425JZp2IEMtSgCd0If9DROSgJ', 'Cashier', 1, '2018-03-29 17:16:47', '2018-07-04 15:31:12', 'Jeremiah', 'Pimentel', '9322322322');
+INSERT INTO `users` (`id`, `username`, `password`, `remember_token`, `role`, `active`, `created_at`, `updated_at`, `fullname`, `contact`) VALUES
+(1, 'super', '$2y$10$Zy1XTuyhK3zxTdkkmFicmOXpIEtRpwzoNTZPuna/L9i08C/Bp8aCC', 'QNGzUyb2nxAmEyPIf8gdZagJgqgoG5HVlm0CtIr28DrdVogLUlGaAQaILmWX', 'SuperAdmin', 1, '2016-03-03 10:18:30', '2017-11-22 13:39:52', 'Lance Palor', '9178531817'),
+(2, 'admin', '$2y$10$OzvezM1JTpSyLjBnuxueg.NC9yDNovAGWSi1FFw6yZczE5y6tMpfO', 'mpPIlgw29GgfnjtakRNN5J4A5uKZ8StHENvMfoDNsdPHeS71ekPwVFFEnyQh', 'Admin', 1, '2016-06-04 11:24:02', '2018-07-08 11:34:12', 'Lance Palor', '9178531817'),
+(3, 'cashier', '$2y$10$RGlUQWowwJ8ZCNcll9ByN.rvjp2ZN7HRMonM6wrF5T2ubIXLK8Sh.', 'zLZ0DXeyLdnkL7UwYUveOXrHbzcqaNEZ6wk54eYJPyF7as8H4P682PfeRtmo', 'Cashier', 1, '2016-06-04 11:24:02', '2018-07-08 11:14:24', 'JC Ramos', '9232323230'),
+(4, 'cashier2', '$2y$10$1ymw8qTMQJCWhm8/vRXdFeaafdOu/3kJT7JS5Iv954f6/jFdYxrSa', 'ZeDwrULdwTT6Tix1AgyR245iWo75iV5apop425JZp2IEMtSgCd0If9DROSgJ', 'Cashier', 1, '2018-03-29 17:16:47', '2018-07-08 11:34:07', 'Jeremiah Pimentel', '9322322322');
 
 --
 -- Indexes for dumped tables
@@ -1157,7 +1158,7 @@ ALTER TABLE `orders`
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=592;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=594;
 
 --
 -- AUTO_INCREMENT for table `products`

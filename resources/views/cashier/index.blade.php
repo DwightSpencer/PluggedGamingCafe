@@ -1,14 +1,14 @@
 @extends('layouts.cashier')
 @section('content')
     <div class="container-fluid" style="margin-top: 10px">
-        <div class="col-md-3" style="padding: 20px">
+        <div class="col-md-3" style="padding: 10px">
             @foreach($menuCategories as $menuCategory)
                 <div class="menu @if($menuCategory->id==(Session::has('menuCategory_id')?Session::get('menuCategory_id'):env('DEFAULT_MENU_CATEGORY'))) active  @endif"
                      onclick="$('.menu').removeClass('active');$(this).addClass('active');ajaxLoad('cashier/products?menuCategory_id={{$menuCategory->id}}','productList')">{{$menuCategory->name}}
                 </div>
             @endforeach
         </div>
-        <div class="col-md-5">
+        <div class="col-md-4">
             <input type="text" class="form-control"
                    style="border: 2px solid gray;height: 50px;border-radius: 0px;background: lightyellow;font-size: 18px"
             <input type="text" class="form-control" placeholder="Search..."
@@ -35,7 +35,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-4" id="orderList">
+        <div class="col-md-5" id="orderList">
             @include('cashier._order')
         </div>
     </div>

@@ -118,26 +118,34 @@ class CashierController extends Controller
     {
         
         $orderDetail = OrderDetail::where('id', $id)->first();
-        $allOPS=$orderDetail->Owner+$orderDetail->PWD+$orderDetail->Senior;
-        if (count($orderDetail)) {
-        if ($allOPS>$orderDetail->quantity) 
-            {$value=$orderDetail->quantity-$orderDetail->PWD-$orderDetail->Senior;}
+        $origValue=$value;
+       
+        $limit=$value-$orderDetail->PWD-$orderDetail->Senior;
+        if ($limit>$orderDetail->quantity) {
+            if ($limit>$orderDetail->pax) {
+                $value=$orderDetail->pax;
+            }
+        }
+        if ($value>$limit) {$value=$limit;}
         if ($value<0) {$value=0;}
             $orderDetail->Owner = $value;
             $orderDetail->save();
-        } 
-            $value=$orderDetail->Owner*1*$orderDetail->Price+$orderDetail->PWD*.2*$orderDetail->Price+$orderDetail->Senior*.2*$orderDetail->Price;
-            $orderDetail->discount = $value;
-            $orderDetail->save(); 
         return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
     }
     public function updatePWD($id, $value)
     {
         $orderDetail = OrderDetail::where('id', $id)->first();
+        $origValue=$value;
        
-        $allOPS=$orderDetail->Owner+$orderDetail->PWD+$orderDetail->Senior;
-        if ($allOPS>$orderDetail->quantity) {$value=$orderDetail->quantity-$orderDetail->Owner-$orderDetail->Senior;}
-        if ($value<0) $value=0; 
+        $limit=$value-$orderDetail->Owner-$orderDetail->Senior;
+        if ($limit>$orderDetail->quantity) {
+            if ($limit>$orderDetail->pax) {
+                echo "<script type='text/javascript'>alert('You can not exceed the number of persons or quantity!')</script>";
+                $value=$orderDetail->pax;
+            }
+        }
+        if ($value>$limit) {$value=$limit;}
+        if ($value<0) {$value=0;}
             $orderDetail->PWD = $value;
             $orderDetail->save();
         return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
@@ -145,11 +153,20 @@ class CashierController extends Controller
     public function updateSenior($id, $value)
     {
         $orderDetail = OrderDetail::where('id', $id)->first();
-        $allOPS=$orderDetail->Owner+$orderDetail->PWD+$orderDetail->Senior;
-        if ($allOPS>$orderDetail->quantity) {$value=$orderDetail->quantity-$orderDetail->Owner-$orderDetail->PWD;}
-        if ($value<0) $value=0; 
-            $orderDetail->Senior = $value;
-            $orderDetail->save();
+        $origValue=$value;
+       
+        $limit=$value-$orderDetail->PWD-$orderDetail->Owner;
+        if ($limit>$orderDetail->quantity) {
+            if ($limit>$orderDetail->pax) {
+                echo "<script type='text/javascript'>alert('You can not exceed the number of persons  or quantity!')</script>";
+                $value=$orderDetail->pax; 
+            }
+        }
+        if ($value>$limit) {$value=$limit;}
+        if ($value<0) {$value=0;}           
+        $orderDetail->Senior = $value;
+        $orderDetail->save();
+
             
         return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
     }
@@ -166,8 +183,8 @@ class CashierController extends Controller
     {
         $orderDetail = OrderDetail::where('id', $id)->first();
         if (count($orderDetail)) {
-            if ($orderDetail->Srv>$orderDetail->quantity) {$value=$orderDetail->quantity;}
-            if ($orderDetail->Srv<0) {$value=0;}
+            if ($value>$orderDetail->quantity) {echo "<script type='text/javascript'>alert('You can not exceed the number of orders!')</script>";$value=$orderDetail->quantity;}
+            if ($value<0) $value=0;
             $orderDetail->Srv = $value;
             $orderDetail->save();
         }
@@ -177,6 +194,8 @@ class CashierController extends Controller
     {
         $orderDetail = OrderDetail::where('id', $id)->first();
         if (count($orderDetail)) {
+            if ($orderDetail->Pax<0) $orderDetail->Pax=1;
+            if ($orderDetail->Pax>4) {echo "<script type='text/javascript'>alert('Maximum of 4 persons per table!')</script>";$value=4;}
             $orderDetail->Pax = $value;
             $orderDetail->save();
         }
@@ -328,6 +347,7 @@ class CashierController extends Controller
         }
         return view('cashier.print_payment', ['order' => $order]);
     }
+
     public function pay(Request $request)
     {
         if ($request->isMethod('get')) {
@@ -343,9 +363,11 @@ class CashierController extends Controller
                     'errors' => $validator->getMessageBag()->toArray()
                 );
             }
+            
             $order = Order::find(Session::get('order_id'));
-            $total = $order->order_details()->select(DB::raw('sum(quantity*price*(1-discount/100)) as  total'))->first()->total;
-            $total = $total * (1 - $order->discount / 100);
+            
+            $total = $order->order_details()->select(DB::raw('sum(quantity*price-(Owner*price+PWD*price*.2+Senior*price*.2)) as  total'))->first()->total;
+           
             $cashin = Input::get('usd');
             if ($total > $cashin)
                 return array(

@@ -48,13 +48,11 @@ if(isset($filename)){
             <th style="text-align: left">Total</th>
             <th style="text-align: left">Served</th>
             <th style="text-align: left">Delete</th>
-            <th style="width: 1px"></th>
-            
         </tr>
         </thead>
         
         @if(count($order)>0)
-            <?php $total = 0; $allDisc=0; $max=0; $totOPS=0;?>
+            <?php $total = 0; $ntotal = 0;  $allDisc=0; $max=0; $totOPS=0;?>
             <tbody>
             @foreach($order->order_details()->orderBy('description')->get() as $orderDetail)
                 <tr style="color: darkblue;@if(($orderDetail->status=='Filled')) color: red; @endif @if(!empty($orderDetail->deleted_at)) text-decoration: line-through; @endif">
@@ -64,31 +62,32 @@ if(isset($filename)){
                     </td>
                     <td style="@if($orderDetail->sent==1) color:red; @endif">
                         <input  onkeypress="ajaxLoad('cashier/update-description/{{$orderDetail->id}}/'+this.value,'orderList')"
-                               type="text" style="width: 100%;border: none;height: 30px"
+                               type="text" style="width: 100%;border: none;height: 20px"
                                value="{{$orderDetail->description}}" readonly/>
                     </td>
                     <td align="left">
                         <input onfocus="$(this).select()"
                         onchange="ajaxLoad('cashier/update-quantity/{{$orderDetail->id}}/'+this.value,'orderList')"
-                               type="number" step="1" style="width: 50px;border: 1;height: 30px;text-align:right"
+                               type="number" step="1" style="width: 50px;border: 1;height: 20px;text-align:right"
                                value="{{$orderDetail->quantity}}" />
                     </td>
                     <td align="left">
                         <input onfocus="$(this).select()"
                         onkeypress="ajaxLoad('cashier/update-price/{{$orderDetail->id}}/'+this.value,'orderList')"
-                               type="text" style="width: 56px;border: none;height: 30px;text-align: left"
+                               type="text" style="width: 56px;border: none;height: 20px;text-align: left"
                                value="₱ {{number_format($orderDetail->price,2)}}" readonly/>
                     </td>
                     <td align="left">
-                        <input type="text" style="width: 70px;border: none;height: 30px;text-align: left" readonly
+                        <input type="text" style="width: 70px;border: none;height: 20px;text-align: left" readonly
                                value="₱ {{number_format($orderDetail->price * $orderDetail->quantity,2)}}" readonly="readonly"/>               
                     <td align="right">
                       <input onfocus="$(this).select()"
                       onchange="ajaxLoad('cashier/update-Srv/{{$orderDetail->id}}/'+this.value,'orderList')"
                      
-                               type="number" step="1" style="width: 50px;border: 1;height: 30px;text-align: right"
-                               max="{{$orderDetail->quantity}}"
-                               min="{{0}}"
+                                type="number" step="1" style="width: 70px;border: 1;height: 20px;text-align: right"
+                                max="{{$orderDetail->quantity}}"
+                                min="{{0}}"
+                                pattern="[0-9]"
                                value="{{$orderDetail->Srv}}" />   
                         </td>
                     <td align="center">
@@ -106,11 +105,13 @@ if(isset($filename)){
                       <td align="left">
                      
                       <input onfocus="$(this).select()"
+                                name="owner"
+                                onkeypress="<script type='text/javascript'>alert('You can not exceed the number of persons  or quantity!')</script>"
                                 onchange="ajaxLoad('cashier/update-Owner/{{$orderDetail->id}}/'+this.value,'orderList')"
-                
-                               type="text"  style="width: 50px;border: 1;height: 30px;text-align: right"
-                               max="{{$max}}"
-                               min="{{0}}"
+                                type="number" step="1" style="width: 50px;border: 1;height: 20px;text-align: right"
+                                max="{{4}}"
+                                min="{{0}}"
+                                pattern="[0-9]"
                                value="{{$orderDetail->Owner}}" />
                                
                         </td>
@@ -119,22 +120,23 @@ if(isset($filename)){
                         <input onfocus="$(this).select()"
                                 onchange="ajaxLoad('cashier/update-PWD/{{$orderDetail->id}}/'+this.value,'orderList')"
                                 
-                                type="text" step="1" style="width: 50px;border: 1;height: 30px;text-align: right"
-                                max="{{$orderDetail->quantity}}"
-                               min="{{0}}"
+                                type="number" step="1" style="width: 50px;border: 1;height: 20px;text-align: right"
+                                max="{{4}}"
+                                min="{{0}}"
+                                pattern="[0-9]"
                                value="{{$orderDetail->PWD}}" />
                        </td>
                        
                         <td align="left">
                         <input onfocus="$(this).select()"
-                                
                                 onchange="ajaxLoad('cashier/update-Senior/{{$orderDetail->id}}/'+this.value,'orderList')"
-                                type="text" step="1" style="width: 50px;border: 1;height: 30px;text-align: right"
-                                max="{{$orderDetail->quantity}}"
+                                type="number" step="1" style="width: 50px;border: 1;height: 20px;text-align: right"
+                                max="{{4}}"
                                 min="{{0}}"
+                                pattern="[0-9]"
                                 value="{{$orderDetail->Senior}}" />
                        </td>
-                       <td align="left">
+                       <td align="right">
                        <?php 
                             $totDisc=$orderDetail->Owner+$orderDetail->PWD+$orderDetail->Senior;
                             if ($totDisc>$orderDetail->quantity) {
@@ -149,7 +151,7 @@ if(isset($filename)){
                             $orderDetail->discount=$orderDetail->Owner*$orderDetail->price+$orderDetail->PWD*$orderDetail->price*.2+$orderDetail->Senior*$orderDetail->price*.2;
                         ?>
                        ₱<input onfocus="$(this).select()"
-                            type="text"  style="width:35px;border: none;height: 30px;text-align: right"
+                            type="text"  style="width:50px;border: none;height: 20px;text-align: right"
                              value="{{number_format($orderDetail->discount,2)}}" readonly />
                        </td>
                     </th>
@@ -160,7 +162,7 @@ if(isset($filename)){
                     </td>
                 </tr>
                 
-                <?php if (empty($orderDetail->deleted_at)) $total += ($orderDetail->price * $orderDetail->quantity ); ?>
+                <?php if (empty($orderDetail->deleted_at)) $ntotal += ($orderDetail->price * $orderDetail->quantity ); ?>
                 <?php 
                     $allDisc+=$orderDetail->discount;
                 ?>
@@ -191,29 +193,38 @@ if(isset($filename)){
                     <th style="text-align: right;padding-right: 20px">Pax:</th>
                     <td align="right">
                       <input onfocus="$(this).select()"
+        
                       onchange="ajaxLoad('cashier/update-Pax/{{$orderDetail->id}}/'+this.value,'orderList')"
-                     
-                               type="number" step="1" style="width: 60px;border: 1;height: 30px;text-align: right"
-                               min="{{0}}"
+                               type="number" step="1" style="width: 60px;border: 1;height: 20px;text-align: right"
+                               max="{{4}}"
+                               min="{{1}}"
                                value="{{$orderDetail->Pax}}" />   
                         </td>
                 </tr>
                 <tr>
                     <th style="text-align: right;padding-right: 20px">Total:</th>
-                    <th style="text-align: right">₱ {{number_format($total,2)}}</th>
-                
+                    <th style="text-align: right">₱ {{number_format($ntotal,2)}}</th>
                 </tr>
                 <tr>
                     <th style="text-align: right;padding-right: 20px">Discount:</th>
-                    <th style="text-align: right">₱ {{number_format($allDisc,2)}}
-                    
-                        
-                    </th>
+    
+                    <th style="text-align: right">{{number_format($allDisc,2)}}</th>
                 </tr>
                 <tr>
-                    <th style="text-align: right;padding-right: 20px">Total less discount:</th>
-                    <th style="text-align: right">₱ {{number_format($total-$allDisc,2)}}</th>
-                
+                    <th style="text-align: right;padding-right: 20px">Total Amount without VAT:</th>
+                    <?php $total=$ntotal-$allDisc;$total=$total-($total*.12)?>
+                    <th style="text-align: right">₱ {{number_format($total,2)}}</th>
+                </tr>
+
+                <tr>
+                    <th style="text-align: right;padding-right: 20px">VAT:</th>
+                    <?php $total=$ntotal-$totDisc;?>
+                    <th style="text-align: right">₱ {{number_format($total*.12,2)}}</th>
+                </tr>
+                <tr>
+                    <th style="text-align: right;padding-right: 20px">Total Amount DUE:</th>
+                    <?php $total=$ntotal-$allDisc;?>
+                    <th style="text-align: right">₱ {{number_format($total,2)}}</th>
                 </tr>
 
          <div style="text-align: left;float: left;border-top: solid 1px whitesmoke;">

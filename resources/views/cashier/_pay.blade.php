@@ -6,14 +6,15 @@
                 <tr>
                     <th>Description</th>
                     <th>Qty</th>
-                    <th>Price</th>
-                    <th>Total</th>
+                    <th align="right">Price</th>
+                    <th align="right">Total</th>
+                    <th align="right">Discount</th>
                 </tr>
                 </thead>
                 @if(count($order)>0)
                     <tbody>
-                    <?php $total = 0; ?>
-                    @foreach($order->order_details()->select(DB::raw("description,sum(quantity) as quantity,price,discount"))->groupBy('product_id')->groupBy('price')->groupBy('description')->groupBy('discount')->orderBy('description')->get() as $orderDetail)
+                    <?php $total = 0; $ntotal = 0; $totDisc=0;$disc=0;?>
+                    @foreach($order->order_details()->select(DB::raw("description,sum(quantity) as quantity,price,discount,Owner,PWD,Senior"))->groupBy('product_id')->groupBy('price')->groupBy('description')->groupBy('discount')->groupBy('Owner')->groupBy('PWD')->groupBy('Senior')->orderBy('description')->get() as $orderDetail)
                         <tr @if(!empty($orderDetail->deleted_at)) style="text-decoration: line-through;" @endif>
                             <td>
                                 {{$orderDetail->description}}
@@ -23,9 +24,18 @@
                             </td>
                             <td align="right">₱ {{number_format($orderDetail->price,2)}}</td>
                             <td align="right">
-                                ₱ {{number_format($orderDetail->price * $orderDetail->quantity* (1 - $orderDetail->discount / 100),2)}}</td>
+                                ₱ {{number_format($orderDetail->price * $orderDetail->quantity,2)}}</td>
+                            <td align="right">
+                           <?php
+                            $disc=$orderDetail->Owner * $orderDetail->price+$orderDetail->PWD * $orderDetail->price*.2+$orderDetail->Senior * $orderDetail->price*.2;
+                            $totDisc+=$disc;
+                            ?>
+                            
+                            ₱ {{number_format($disc,2)}}</td>
                         </tr>
-                        <?php if (empty($orderDetail->deleted_at)) $total += ($orderDetail->price * $orderDetail->quantity * (1 - $orderDetail->discount / 100)); ?>
+                        
+                        <?php if (empty($orderDetail->deleted_at)) $ntotal += ($orderDetail->price * $orderDetail->quantity); ?>
+                                         
                     @endforeach
                     </tbody>
                 @endif
@@ -33,13 +43,30 @@
             @if(count($order)>0)
                 <div style="text-align: right;float: right;border-top: solid 1px whitesmoke;">
                     <table width="100%">
-                        <tr>
-                            <th style="text-align: right;padding-right: 20px">Discount:</th>
-                            <th style="text-align: right">{{$order->discount}} %</th>
+                         <tr>
+                            <th style="text-align: right;padding-right: 20px">Total:</th>
+                            <th style="text-align: right">₱ {{number_format($ntotal,2)}}</th>
                         </tr>
                         <tr>
-                            <th style="text-align: right;padding-right: 20px">Total:</th>
-                            <th style="text-align: right">₱ {{number_format($total*(1-$order->discount/100),2)}}</th>
+                            <th style="text-align: right;padding-right: 20px">Discount:</th>
+            
+                            <th style="text-align: right">{{number_format($totDisc,2)}}</th>
+                        </tr>
+                        <tr>
+                            <th style="text-align: right;padding-right: 20px">Total Amount without VAT:</th>
+                           <?php $total=$ntotal-$totDisc;$total=$total-($total*.12)?>
+                            <th style="text-align: right">₱ {{number_format($total,2)}}</th>
+                        </tr>
+                        
+                        <tr>
+                            <th style="text-align: right;padding-right: 20px">VAT:</th>
+                            <?php $total=$ntotal-$totDisc;?>
+                            <th style="text-align: right">₱ {{number_format($total*.12,2)}}</th>
+                        </tr>
+                        <tr>
+                            <th style="text-align: right;padding-right: 20px">Total Amount DUE:</th>
+                           <?php $total=$ntotal-$totDisc;?>
+                            <th style="text-align: right">₱ {{number_format($total,2)}}</th>
                         </tr>
                     </table>
                 </div>

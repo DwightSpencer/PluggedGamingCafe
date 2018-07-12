@@ -1,4 +1,3 @@
-
 <center>
     <img src="{{asset('images/logo.png')}}" height="80px" width="150px"/>
     <h1 style="font-size:20px;margin:0">Plugged Board Cafe and Gaming Lounge</h1>

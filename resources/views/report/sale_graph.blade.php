@@ -48,7 +48,6 @@
         },
         xAxis: {
             categories: <?php echo json_encode($iv); ?>
-
         },
         yAxis: {
             title: {

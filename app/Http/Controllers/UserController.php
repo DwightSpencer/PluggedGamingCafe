@@ -1,6 +1,5 @@
 <?php
 namespace App\Http\Controllers;
-
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -9,7 +8,6 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
-
 class UserController extends Controller
 {
     public function index()
@@ -26,7 +24,6 @@ class UserController extends Controller
             ->orderBy(Session::get('user_field'), Session::get('user_sort'))->paginate(20);
         return view('user.index', ['users' => $users]);
     }
-
     public function update(Request $request, $id)
     {
         if ($request->isMethod('get'))
@@ -56,7 +53,6 @@ class UserController extends Controller
             Session::put('msg_status', true);
         }
     }
-
     public function create(Request $request)
     {
         if ($request->isMethod('get'))
@@ -83,13 +79,11 @@ class UserController extends Controller
             Session::put('msg_status', true);
         }
     }
-
     public function delete($id)
     {
         User::destroy($id);
         return redirect('user');
     }
-
     public function changePassword(Request $request)
     {
         if ($request->isMethod('get'))

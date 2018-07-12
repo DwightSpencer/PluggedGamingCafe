@@ -15,7 +15,6 @@
         .picker__select--month, .picker__select--year {
             height: inherit;
         }
-
         .form-control:disabled, .form-control[readonly] {
             background-color: white;
         }

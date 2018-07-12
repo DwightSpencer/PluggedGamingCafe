@@ -29,6 +29,7 @@ class CashierController extends Controller
                 ProductCategory::orderBy('ordering')->get(),
             'order' => $order
         ]);
+       
     }
     public function products()
     {
@@ -59,6 +60,7 @@ class CashierController extends Controller
     }
     public function order($id)
     {
+        
         $menu = Product::find($id);
         if (count($menu) > 0 or ($id == 0 and env('KTV'))) {
             $order = Order::find(Session::get('order_id'));
@@ -83,6 +85,8 @@ class CashierController extends Controller
                 $order_detail->description = $menu->name;
                 $order_detail->price = $menu->unitprice;
                 $order_detail->user_id = Auth::user()->id;
+                $p=Session::get('pax');
+                $order_detail->pax = $p;
                 $order_detail->save();
             } else {
                 if ($id < 0)
@@ -165,9 +169,7 @@ class CashierController extends Controller
         if ($value>$limit) {$value=$limit;}
         if ($value<0) {$value=0;}           
         $orderDetail->Senior = $value;
-        $orderDetail->save();
-
-            
+        $orderDetail->save();   
         return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
     }
     
@@ -197,6 +199,12 @@ class CashierController extends Controller
             if ($orderDetail->Pax<0) $orderDetail->Pax=1;
             if ($orderDetail->Pax>4) {echo "<script type='text/javascript'>alert('Maximum of 4 persons per table!')</script>";$value=4;}
             $orderDetail->Pax = $value;
+            
+            Session::put('pax', $value);
+            $sql = "UPDATE order_details SET Pax='$value' WHERE order_id=$id";
+            $o=Session::get('order_id');
+            
+            DB::update('update order_details set Pax = '.$value.' where order_id ='.$o);
             $orderDetail->save();
         }
         return view('cashier._order', ['order' => Order::find(Session::get('order_id'))]);
@@ -251,6 +259,7 @@ class CashierController extends Controller
     }
     public function table()
     {
+       
         return view('cashier.table', ['tables' => Table::orderBy('name')->get()]);
     }
     public function selectTable($id)
@@ -263,6 +272,7 @@ class CashierController extends Controller
             Session::put('order_id', '');
             $order = [];
         }
+        
         return view('cashier._order', ['order' => $order]);
     }
     public function changeTable()
@@ -315,6 +325,9 @@ class CashierController extends Controller
             $orderDetail->user_id = Auth::user()->id;
             $orderDetail->save();
             Session::put('order_id', $order->id);
+            $o=Session::get('order_id');
+            $p=$order_detail->pax;
+            DB::update('update order_details set Pax = '.$p.' where order_id ='.$o);
             return view('cashier._order', ['order' => $order]);
         }
     }
@@ -347,7 +360,6 @@ class CashierController extends Controller
         }
         return view('cashier.print_payment', ['order' => $order]);
     }
-
     public function pay(Request $request)
     {
         if ($request->isMethod('get')) {

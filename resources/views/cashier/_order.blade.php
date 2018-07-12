@@ -1,5 +1,6 @@
 <?php if(isset($_POST['print_payment.blade.php'])){
     $filename = $_POST['print_payment.blade.php'];
+    $pax=0;
 }
 if(isset($filename)){ 
     echo $filename;
@@ -37,32 +38,39 @@ if(isset($filename)){
         Cash Out
     </a>
 </div>
-<div class="row" style="background: white;padding: 10px 10px 30px 10px">
-    <table class="table">
+<div class="row" style="background: white;padding: 10px 50px 30px 10px">
+    <table class="table" >
         <thead>
+    
         <tr>
-            <th style="margin: 0px;padding: 0px;vertical-align: middle" width="1px">Id</th>
-            <th style="text-align: left">Description</th>
+            <th style="text-align: left">Id</th>
+            <th style="text-align: left; width: 100px">  Description </th>
             <th style="text-align: left">Qty</th>
             <th style="text-align: left">Price</th>
             <th style="text-align: left">Total</th>
             <th style="text-align: left">Served</th>
             <th style="text-align: left">Delete</th>
+           
         </tr>
         </thead>
         
         @if(count($order)>0)
-            <?php $total = 0; $ntotal = 0;  $allDisc=0; $max=0; $totOPS=0;?>
+
+            <?php $total = 0; $ntotal = 0;  $allDisc=0; $max=0; $totOPS=0;
+                           
+            ?>
             <tbody>
+            
             @foreach($order->order_details()->orderBy('description')->get() as $orderDetail)
+               <?php  $pax=$orderDetail->pax; ?>
                 <tr style="color: darkblue;@if(($orderDetail->status=='Filled')) color: red; @endif @if(!empty($orderDetail->deleted_at)) text-decoration: line-through; @endif">
-                    <td style="margin: 0px;padding: 0px;vertical-align: middle">
-                        <input type="text" style="width: 20px;height: 18px" value="{{$orderDetail->id}}"
+                    <td style="margin: 0px;padding: 0px;vertical-align:middle">
+                        <input type="text" style="width: 30px;height: 18px" value="{{$orderDetail->id}}"
                                class="idRow" readonly/>
                     </td>
                     <td style="@if($orderDetail->sent==1) color:red; @endif">
                         <input  onkeypress="ajaxLoad('cashier/update-description/{{$orderDetail->id}}/'+this.value,'orderList')"
-                               type="text" style="width: 100%;border: none;height: 20px"
+                               type="text" style="width: 100%;border: none;height: 20px; text-align: left"
                                value="{{$orderDetail->description}}" readonly/>
                     </td>
                     <td align="left">
@@ -99,7 +107,8 @@ if(isset($filename)){
                     
                     <th style="text-align: left;"></th>
                     <th style="text-align: left">
-                      <tr><td><td><td align="left"> Owner <td align="left"> PWD <td align="left"> Senior </td>  <td align="left"> Discount </td> 
+                      <tr><td><td>
+                      <td align="left"> Owner <td align="left"> PWD <td align="left"> Senior </td>  <td align="left"> Discount </td> 
                       <tr><td><td>
                       
                       <td align="left">
@@ -197,8 +206,9 @@ if(isset($filename)){
                       onchange="ajaxLoad('cashier/update-Pax/{{$orderDetail->id}}/'+this.value,'orderList')"
                                type="number" step="1" style="width: 60px;border: 1;height: 20px;text-align: right"
                                max="{{4}}"
-                               min="{{1}}"
-                               value="{{$orderDetail->Pax}}" />   
+                               min="{{0}}"
+                               value="{{$orderDetail->Pax}}" /> 
+                              
                         </td>
                 </tr>
                 <tr>

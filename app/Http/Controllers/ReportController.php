@@ -1,6 +1,5 @@
 <?php
 namespace App\Http\Controllers;
-
 use App\Item;
 use App\ProductCategory;
 use App\Order;
@@ -8,7 +7,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
-
 class ReportController extends Controller
 {
     public function dailySummary()
@@ -90,7 +88,6 @@ class ReportController extends Controller
     {
         return view('report.sales_transaction');
     }
-
     public function printDailySummary()
     {
         Session::put('report_from', Input::has('report_from') ? Input::get('report_from') : (Session::has('report_from') ? Session::get('report_from') : date("Y-m-d")));
@@ -147,7 +144,6 @@ class ReportController extends Controller
             ->first();
         return view('report.print_daily_summary', ['orders' => $order, 'sale' => $sale]);
     }
-
     public function saleHistory()
     {
         Session::put('report_from', Input::has('report_from') ? Input::get('report_from') : (Session::has('report_from') ? Session::get('report_from') : date("Y-m-d")));
@@ -162,7 +158,6 @@ class ReportController extends Controller
         $orders = $orders->paginate(20);
         return view('report.sale_history', ['orders' => $orders]);
     }
-
     public function saleDeletedReport()
     {
         Session::put('report_from', Input::has('report_from') ? Input::get('report_from') : (Session::has('report_from') ? Session::get('report_from') : date("Y-m-d")));
@@ -176,14 +171,12 @@ class ReportController extends Controller
         $orders = $orders->where('deleted_at', '!=', null)->paginate(20);
         return view('report.sale_deleted_report', ['orders' => $orders]);
     }
-
     public function viewDetail($id)
     {
         return view('report.view', ['order' => Order::find($id)]);
         
         
     }
-
     public function saleDetail()
     {
         Session::put('report_from', Input::has('report_from') ? Input::get('report_from') : (Session::has('report_from') ? Session::get('report_from') : date("Y-m-d")));
@@ -204,7 +197,6 @@ class ReportController extends Controller
             ->get();
         return view('report.sale_detail', ['orderDetails' => $orderDetails]);
     }
-
     public function saleGraph()
     {
         Session::put('from', Input::has('from') ? Input::get('from') : (Session::has('from') ? Session::get('from') : date("d-M-Y", strtotime("-7 days"))));
@@ -298,7 +290,6 @@ class ReportController extends Controller
         }
         return view('report.sale_graph', ['iv' => $iv, 'morning' => $morning, 'afternoon' => $afternoon, 'evening' => $evening, 'daily' => $daily]);
     }
-
     public function saleStock()
     {
         Session::put('report_from', Input::has('report_from') ? Input::get('report_from') : (Session::has('report_from') ? Session::get('report_from') : date("Y-m-d")));
@@ -316,7 +307,6 @@ class ReportController extends Controller
             ->get();
         return view('report.sale_stock', ['stock' => $stock]);
     }
-
     public function saleDiscount()
     {
         Session::put('page', 'report/sale-discount');
@@ -337,7 +327,6 @@ class ReportController extends Controller
             ->get();
         return view('report.sale_discount', ['discount' => $discount]);
     }
-
     public function exportDetailReport()
     {
         Session::put('report_from', Input::has('report_from') ? Input::get('report_from') : (Session::has('report_from') ? Session::get('report_from') : date("Y-m-d")));
@@ -372,7 +361,6 @@ class ReportController extends Controller
             });
         })->export('xlsx');
     }
-
     public function stockBalance()
     {
         Session::put('item_search', Input::has('ok') ? Input::get('search') : (Session::has('item_search') ? Session::get('item_search') : ''));
